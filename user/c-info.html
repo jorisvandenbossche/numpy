@@ -1,0 +1,512 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Using NumPy C-API &#8212; NumPy v1.18.dev0 Manual</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="../_static/sphinx-bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/extra-footer.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom_theme.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/code-highlight.css" />
+    <link href="../_static/css/custom.css" rel="stylesheet">
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="How to extend NumPy" href="c-info.how-to-extend.html" />
+    <link rel="prev" title="Building from source" href="building.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+
+<a class="navbar-brand" href="../index.html">
+  <img src="../_static/numpy_logo.png" class="logo" alt="logo">
+</a>
+
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+</button>
+
+<div id="navbar-menu" class="collapse navbar-collapse">
+  <ul id="navbar-main-elements" class="navbar-nav mr-auto">
+    <li class="nav-item">
+        <a class="nav-link" href="../index.html">Home</a>
+    </li>
+    
+    
+    <li class="nav-item active">
+        <a class="nav-link" href="index.html">User Guide</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../reference/index.html">NumPy Reference</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../dev/index.html">Contributing to NumPy</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../release.html">Release Notes</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../about.html">About NumPy</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href=""></a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../bugs.html">Reporting bugs</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../glossary.html">Glossary</a>
+    </li>
+    
+  </ul>
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+      <a class="nav-link" href="https://github.com/pandas-dev/pandas" target="_blank" rel="noopener">
+        <span><i class="fab fa-github-alt" style="color:#333;font-size:1rem;line-height:1.25"></i></span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="https://twitter.com/pandas_dev" target="_blank" rel="noopener">
+        <span><i class="fab fa-twitter" style="color:#55acee;font-size:1rem;line-height:1.25"></i></span>
+      </a>
+    </li>
+  </ul>
+</div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row flex-xl-nowrap">
+          <div class="col-12 col-md-3 col-xl-2 bd-sidebar">
+              
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+  <div class="bd-toc-item active">
+  
+
+  <ul class="nav bd-sidenav">
+      
+      
+        
+          
+              <li class="">
+                  <a href="setting-up.html">Setting up</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="quickstart.html">Quickstart tutorial</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="basics.html">NumPy basics</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="misc.html">Miscellaneous</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="numpy-for-matlab-users.html">NumPy for Matlab users</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="building.html">Building from source</a>
+              </li>
+          
+        
+          
+    
+              <li class="active">
+                  <a href="">Using NumPy C-API</a>
+                  <ul>
+                  
+                      <li class="">
+                          <a href="c-info.how-to-extend.html">How to extend NumPy</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="c-info.python-as-glue.html">Using Python as glue</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="c-info.ufunc-tutorial.html">Writing your own ufunc</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="c-info.beyond-basics.html">Beyond the Basics</a>
+                      </li>
+                  
+                  </ul>
+              </li> 
+          
+        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </ul>
+
+</nav>
+
+
+              
+          </div>
+
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+              
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+    </ul>
+</nav>
+              
+            </div>
+
+          <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">
+              <div>
+                
+  <div class="section" id="using-numpy-c-api">
+<h1>Using NumPy C-API<a class="headerlink" href="#using-numpy-c-api" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="c-info.how-to-extend.html">How to extend NumPy</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="c-info.how-to-extend.html#writing-an-extension-module">Writing an extension module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="c-info.how-to-extend.html#required-subroutine">Required subroutine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="c-info.how-to-extend.html#defining-functions">Defining functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="c-info.how-to-extend.html#functions-without-keyword-arguments">Functions without keyword arguments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="c-info.how-to-extend.html#functions-with-keyword-arguments">Functions with keyword arguments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="c-info.how-to-extend.html#reference-counting">Reference counting</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="c-info.how-to-extend.html#dealing-with-array-objects">Dealing with array objects</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="c-info.how-to-extend.html#converting-an-arbitrary-sequence-object">Converting an arbitrary sequence object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="c-info.how-to-extend.html#creating-a-brand-new-ndarray">Creating a brand-new ndarray</a></li>
+<li class="toctree-l3"><a class="reference internal" href="c-info.how-to-extend.html#getting-at-ndarray-memory-and-accessing-elements-of-the-ndarray">Getting at ndarray memory and accessing elements of the ndarray</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="c-info.how-to-extend.html#example">Example</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="c-info.python-as-glue.html">Using Python as glue</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="c-info.python-as-glue.html#calling-other-compiled-libraries-from-python">Calling other compiled libraries from Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="c-info.python-as-glue.html#hand-generated-wrappers">Hand-generated wrappers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="c-info.python-as-glue.html#f2py">f2py</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="c-info.python-as-glue.html#creating-source-for-a-basic-extension-module">Creating source for a basic extension module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="c-info.python-as-glue.html#creating-a-compiled-extension-module">Creating a compiled extension module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="c-info.python-as-glue.html#improving-the-basic-interface">Improving the basic interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="c-info.python-as-glue.html#inserting-directives-in-fortran-source">Inserting directives in Fortran source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="c-info.python-as-glue.html#a-filtering-example">A filtering example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="c-info.python-as-glue.html#calling-f2py-from-python">Calling f2py from Python</a></li>
+<li class="toctree-l3"><a class="reference internal" href="c-info.python-as-glue.html#automatic-extension-module-generation">Automatic extension module generation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="c-info.python-as-glue.html#conclusion">Conclusion</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="c-info.python-as-glue.html#cython">Cython</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="c-info.python-as-glue.html#complex-addition-in-cython">Complex addition in Cython</a></li>
+<li class="toctree-l3"><a class="reference internal" href="c-info.python-as-glue.html#image-filter-in-cython">Image filter in Cython</a></li>
+<li class="toctree-l3"><a class="reference internal" href="c-info.python-as-glue.html#id2">Conclusion</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="c-info.python-as-glue.html#index-3">ctypes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="c-info.python-as-glue.html#having-a-shared-library">Having a shared library</a></li>
+<li class="toctree-l3"><a class="reference internal" href="c-info.python-as-glue.html#loading-the-shared-library">Loading the shared library</a></li>
+<li class="toctree-l3"><a class="reference internal" href="c-info.python-as-glue.html#converting-arguments">Converting arguments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="c-info.python-as-glue.html#calling-the-function">Calling the function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="c-info.python-as-glue.html#complete-example">Complete example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="c-info.python-as-glue.html#id5">Conclusion</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="c-info.python-as-glue.html#additional-tools-you-may-find-useful">Additional tools you may find useful</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="c-info.python-as-glue.html#swig">SWIG</a></li>
+<li class="toctree-l3"><a class="reference internal" href="c-info.python-as-glue.html#sip">SIP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="c-info.python-as-glue.html#boost-python">Boost Python</a></li>
+<li class="toctree-l3"><a class="reference internal" href="c-info.python-as-glue.html#pyfort">PyFort</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="c-info.ufunc-tutorial.html">Writing your own ufunc</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="c-info.ufunc-tutorial.html#creating-a-new-universal-function">Creating a new universal function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="c-info.ufunc-tutorial.html#example-non-ufunc-extension">Example Non-ufunc extension</a></li>
+<li class="toctree-l2"><a class="reference internal" href="c-info.ufunc-tutorial.html#example-numpy-ufunc-for-one-dtype">Example NumPy ufunc for one dtype</a></li>
+<li class="toctree-l2"><a class="reference internal" href="c-info.ufunc-tutorial.html#example-numpy-ufunc-with-multiple-dtypes">Example NumPy ufunc with multiple dtypes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="c-info.ufunc-tutorial.html#example-numpy-ufunc-with-multiple-arguments-return-values">Example NumPy ufunc with multiple arguments/return values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="c-info.ufunc-tutorial.html#example-numpy-ufunc-with-structured-array-dtype-arguments">Example NumPy ufunc with structured array dtype arguments</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="c-info.beyond-basics.html">Beyond the Basics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="c-info.beyond-basics.html#iterating-over-elements-in-the-array">Iterating over elements in the array</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="c-info.beyond-basics.html#basic-iteration">Basic Iteration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="c-info.beyond-basics.html#iterating-over-all-but-one-axis">Iterating over all but one axis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="c-info.beyond-basics.html#iterating-over-multiple-arrays">Iterating over multiple arrays</a></li>
+<li class="toctree-l3"><a class="reference internal" href="c-info.beyond-basics.html#broadcasting-over-multiple-arrays">Broadcasting over multiple arrays</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="c-info.beyond-basics.html#user-defined-data-types">User-defined data-types</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="c-info.beyond-basics.html#adding-the-new-data-type">Adding the new data-type</a></li>
+<li class="toctree-l3"><a class="reference internal" href="c-info.beyond-basics.html#registering-a-casting-function">Registering a casting function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="c-info.beyond-basics.html#registering-coercion-rules">Registering coercion rules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="c-info.beyond-basics.html#registering-a-ufunc-loop">Registering a ufunc loop</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="c-info.beyond-basics.html#subtyping-the-ndarray-in-c">Subtyping the ndarray in C</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="c-info.beyond-basics.html#creating-sub-types">Creating sub-types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="c-info.beyond-basics.html#specific-features-of-ndarray-sub-typing">Specific features of ndarray sub-typing</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="c-info.beyond-basics.html#the-array-finalize-method">The __array_finalize__ method</a></li>
+<li class="toctree-l4"><a class="reference internal" href="c-info.beyond-basics.html#the-array-priority-attribute">The __array_priority__ attribute</a></li>
+<li class="toctree-l4"><a class="reference internal" href="c-info.beyond-basics.html#the-array-wrap-method">The __array_wrap__ method</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+              </div>
+              <div class='prev-next-bottom'>
+                
+    <a class='left-prev' id="prev-link" href="building.html" title="previous page">Building from source</a>
+    <a class='right-next' id="next-link" href="c-info.how-to-extend.html" title="next page">How to extend NumPy</a>
+
+              </div>
+          </main>
+
+      </div>
+    </div><script>
+    // TOC sidebar - add "active" class to parent list
+    //
+    // Bootstrap's scrollspy adds the active class to the <a> link,
+    // but for the automatic collapsing we need this on the parent list item.
+    //
+    // The event is triggered on "window" (and not the nav item as documented),
+    // see https://github.com/twbs/bootstrap/issues/20086
+    $(window).on("activate.bs.scrollspy", function(){
+    var navLinks = document.querySelectorAll('#bd-toc-nav a');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.remove('active');
+    }
+    var navLinks = document.querySelectorAll('#bd-toc-nav a.active');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.add('active');
+    }
+    });
+
+    /**
+     * Use left and right arrow keys to navigate forward and backwards.
+    */
+    const LEFT_ARROW_KEYCODE = 37
+    const RIGHT_ARROW_KEYCODE = 39
+
+    const getPrevUrl = () => document.getElementById('prev-link').href
+    const getNextUrl = () => document.getElementById('next-link').href
+    const initPageNav = (event) => {
+        const keycode = event.which
+
+        if (keycode === LEFT_ARROW_KEYCODE) {
+            window.location.href = getPrevUrl();
+        } else if (keycode === RIGHT_ARROW_KEYCODE) {
+            window.location.href = getNextUrl();
+        }
+    };
+
+    var keyboardListener = false;
+    $( document ).ready(() => {
+        if (keyboardListener === false) {
+            document.addEventListener('keydown', initPageNav)
+            keyboardListener = true;
+        }
+    });
+</script>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2008-2019, The SciPy community.
+      Last updated on Nov 29, 2019.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.1.
+    </div>
+<div class="footer-area footer--light">
+  <div class="footer-big">
+    <!-- start .container -->
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-12">
+          <div class="footer-widget">
+            <div class="widget-about">
+              <img src="../_static/images/numpy_logo.svg" alt="NumPy logo" class="img-fluid">
+              <p>NumPy is the fundamental package needed for scientific computing with Python.</p>
+              <ul class="contact-details">
+                <li>
+                  <span class="icon-envelope-open"></span>
+                  <a href="https://mail.python.org/mailman/listinfo/numpy-discussion">
+                    Mailing list
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- Ends: .footer-widget -->
+        </div>
+        <!-- end /.col-md-4 -->
+        <div class="col-md-3 col-sm-4">
+          <div class="footer-widget">
+            <div class="footer-menu footer-menu--1">
+              <h4 class="footer-widget-title">About us</h4>
+              <ul>
+                <li>
+                  <a href="#">Our history</a>
+                </li>
+                <li>
+                  <a href="#">Ecosystem</a>
+                </li>
+                <li>
+                  <a href="#">Roadmap</a>
+                </li>
+                <li>
+                  <a href="#">Team</a>
+                </li>
+              </ul>
+            </div>
+            <!-- end /.footer-menu -->
+          </div>
+          <!-- Ends: .footer-widget -->
+        </div>
+        <!-- end /.col-md-3 -->
+
+        <div class="col-md-3 col-sm-4">
+          <div class="footer-widget">
+            <div class="footer-menu">
+              <h4 class="footer-widget-title">Community</h4>
+              <ul>
+                <li>
+                  <a href="#">Blog</a>
+                </li>
+                <li>
+                  <a href="#">Contributing</a>
+                </li>
+                <li>
+                  <a href="#">Code of conduct</a>
+                </li>
+                <li>
+                  <a href="#">Community survey</a>
+                </li>
+              </ul>
+            </div>
+            <!-- end /.footer-menu -->
+          </div>
+          <!-- Ends: .footer-widget -->
+        </div>
+        <!-- end /.col-lg-3 -->
+
+        <div class="col-md-3 col-sm-4">
+          <div class="footer-widget">
+            <div class="footer-menu no-padding">
+              <h4 class="footer-widget-title">Learning &  Documentation</h4>
+              <ul>
+                <li>
+                  <a href="#">User guide</a>
+                </li>
+                <li>
+                  <a href="#">API reference</a>
+                </li>
+                <li>
+                  <a href="#">Release notes</a>
+                </li>
+                <li>
+                  <a href="#">Tutorials</a>
+                </li>
+                <li>
+                  <a href="#">Videos</a>
+                </li>
+                <li>
+                  <a href="#">Books</a>
+                </li>
+                <li>
+                  <a href="#">Courses</a>
+                </li>
+              </ul>
+            </div>
+            <!-- end /.footer-menu -->
+          </div>
+          <!-- Ends: .footer-widget -->
+        </div>
+        <!-- Ends: .col-lg-3 -->
+
+      </div>
+      <!-- end /.row -->
+    </div>
+    <!-- end /.container -->
+  </div>
+  <!-- end /.footer-big -->
+
+  <div class="mini-footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="copyright-text">
+            <p>&copy; <span id="year"></span>
+              <a href="#">NumPy Developers</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </body>
+</html>

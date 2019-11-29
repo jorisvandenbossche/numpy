@@ -1,0 +1,826 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>numpy.polynomial.chebyshev.chebfit &#8212; NumPy v1.18.dev0 Manual</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../_static/sphinx-bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/extra-footer.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/custom_theme.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/code-highlight.css" />
+    <link href="../../_static/css/custom.css" rel="stylesheet">
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="numpy.polynomial.chebyshev.chebvander" href="numpy.polynomial.chebyshev.chebvander.html" />
+    <link rel="prev" title="numpy.polynomial.chebyshev.chebfromroots" href="numpy.polynomial.chebyshev.chebfromroots.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+
+<a class="navbar-brand" href="../../index.html">
+  <img src="../../_static/numpy_logo.png" class="logo" alt="logo">
+</a>
+
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+</button>
+
+<div id="navbar-menu" class="collapse navbar-collapse">
+  <ul id="navbar-main-elements" class="navbar-nav mr-auto">
+    <li class="nav-item">
+        <a class="nav-link" href="../../index.html">Home</a>
+    </li>
+    
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../user/index.html">User Guide</a>
+    </li>
+    
+    <li class="nav-item active">
+        <a class="nav-link" href="../index.html">NumPy Reference</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../dev/index.html">Contributing to NumPy</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../release.html">Release Notes</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../about.html">About NumPy</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href=""></a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../bugs.html">Reporting bugs</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../glossary.html">Glossary</a>
+    </li>
+    
+  </ul>
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+      <a class="nav-link" href="https://github.com/pandas-dev/pandas" target="_blank" rel="noopener">
+        <span><i class="fab fa-github-alt" style="color:#333;font-size:1rem;line-height:1.25"></i></span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="https://twitter.com/pandas_dev" target="_blank" rel="noopener">
+        <span><i class="fab fa-twitter" style="color:#55acee;font-size:1rem;line-height:1.25"></i></span>
+      </a>
+    </li>
+  </ul>
+</div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row flex-xl-nowrap">
+          <div class="col-12 col-md-3 col-xl-2 bd-sidebar">
+              
+
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+  <div class="bd-toc-item active">
+  
+
+  <ul class="nav bd-sidenav">
+      
+      
+      
+      
+        
+          
+              <li class="">
+                  <a href="../arrays.html">Array objects</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../constants.html">Constants</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../ufuncs.html">Universal functions (ufunc)</a>
+              </li>
+          
+        
+          
+    
+              <li class="active">
+                  <a href="../routines.html">Routines</a>
+                  <ul>
+                  
+                      <li class="">
+                          <a href="../routines.array-creation.html">Array creation routines</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.array-manipulation.html">Array manipulation routines</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.bitwise.html">Binary operations</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.char.html">String operations</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.ctypeslib.html">C-Types Foreign Function Interface (numpy.ctypeslib)</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.datetime.html">Datetime Support Functions</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.dtype.html">Data type routines</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.dual.html">Optionally Scipy-accelerated routines (numpy.dual)</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.emath.html">Mathematical functions with automatic domain (numpy.emath)</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.err.html">Floating point error handling</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.fft.html">Discrete Fourier Transform (numpy.fft)</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.financial.html">Financial functions</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.functional.html">Functional programming</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.help.html">NumPy-specific help functions</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.indexing.html">Indexing routines</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.io.html">Input and output</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.linalg.html">Linear algebra (numpy.linalg)</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.logic.html">Logic functions</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.ma.html">Masked array operations</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.math.html">Mathematical functions</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.matlib.html">Matrix library (numpy.matlib)</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.other.html">Miscellaneous routines</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.padding.html">Padding Arrays</a>
+                      </li>
+                  
+                      <li class="active">
+                          <a href="../routines.polynomials.html">Polynomials</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../random/index.html">Random sampling (numpy.random)</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.set.html">Set routines</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.sort.html">Sorting, searching, and counting</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.statistics.html">Statistics</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.testing.html">Test Support (numpy.testing)</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.window.html">Window functions</a>
+                      </li>
+                  
+                  </ul>
+              </li> 
+          
+        
+          
+              <li class="">
+                  <a href="../distutils.html">Packaging (numpy.distutils)</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../distutils_guide.html">NumPy Distutils - Users Guide</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../c-api/index.html">NumPy C-API</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../internals.html">NumPy internals</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../swig.html">NumPy and SWIG</a>
+              </li>
+          
+        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </ul>
+
+</nav>
+
+
+              
+          </div>
+
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+              
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+    </ul>
+</nav>
+              
+            </div>
+
+          <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">
+              <div>
+                
+  <div class="section" id="numpy-polynomial-chebyshev-chebfit">
+<h1>numpy.polynomial.chebyshev.chebfit<a class="headerlink" href="#numpy-polynomial-chebyshev-chebfit" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="numpy.polynomial.chebyshev.chebfit">
+<code class="sig-prename descclassname">numpy.polynomial.chebyshev.</code><code class="sig-name descname">chebfit</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">y</em>, <em class="sig-param">deg</em>, <em class="sig-param">rcond=None</em>, <em class="sig-param">full=False</em>, <em class="sig-param">w=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/numpy/numpy/blob/master/numpy/polynomial/chebyshev.py#L1528-L1647"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#numpy.polynomial.chebyshev.chebfit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Least squares fit of Chebyshev series to data.</p>
+<p>Return the coefficients of a Chebyshev series of degree <em class="xref py py-obj">deg</em> that is the
+least squares fit to the data values <em class="xref py py-obj">y</em> given at points <em class="xref py py-obj">x</em>. If <em class="xref py py-obj">y</em> is
+1-D the returned coefficients will also be 1-D. If <em class="xref py py-obj">y</em> is 2-D multiple
+fits are done, one for each column of <em class="xref py py-obj">y</em>, and the resulting
+coefficients are stored in the corresponding columns of a 2-D return.
+The fitted polynomial(s) are in the form</p>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<span class="docutils literal">p(x) = c_0 + c_1 * T_1(x) + ... + c_n * T_n(x),
+
+</span>)</p>
+<p>latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2017-04-15&gt;
+Babel &lt;3.18&gt; and hyphenation patterns for 3 language(s) loaded.
+(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/size12.clo))
+(/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
+(/usr/share/texlive/texmf-dist/tex/latex/base/t1enc.dfu)
+(/usr/share/texlive/texmf-dist/tex/latex/base/ot1enc.dfu)
+(/usr/share/texlive/texmf-dist/tex/latex/base/omsenc.dfu)))
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/amscls/amsthm.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amssymb.sty
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty))
+
+! LaTeX Error: File `anyfontsize.sty' not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: sty)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.8 \usepackage
+               {bm}^^M
+No pages of output.
+Transcript written on math.log.
+</p>
+</div>
+<p>where <em class="xref py py-obj">n</em> is <em class="xref py py-obj">deg</em>.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>x</strong><span class="classifier">array_like, shape (M,)</span></dt><dd><p>x-coordinates of the M sample points <code class="docutils literal notranslate"><span class="pre">(x[i],</span> <span class="pre">y[i])</span></code>.</p>
+</dd>
+<dt><strong>y</strong><span class="classifier">array_like, shape (M,) or (M, K)</span></dt><dd><p>y-coordinates of the sample points. Several data sets of sample
+points sharing the same x-coordinates can be fitted at once by
+passing in a 2D-array that contains one dataset per column.</p>
+</dd>
+<dt><strong>deg</strong><span class="classifier">int or 1-D array_like</span></dt><dd><p>Degree(s) of the fitting polynomials. If <em class="xref py py-obj">deg</em> is a single integer,
+all terms up to and including the <em class="xref py py-obj">deg</em>’th term are included in the
+fit. For NumPy versions &gt;= 1.11.0 a list of integers specifying the
+degrees of the terms to include may be used instead.</p>
+</dd>
+<dt><strong>rcond</strong><span class="classifier">float, optional</span></dt><dd><p>Relative condition number of the fit. Singular values smaller than
+this relative to the largest singular value will be ignored. The
+default value is len(x)*eps, where eps is the relative precision of
+the float type, about 2e-16 in most cases.</p>
+</dd>
+<dt><strong>full</strong><span class="classifier">bool, optional</span></dt><dd><p>Switch determining nature of return value. When it is False (the
+default) just the coefficients are returned, when True diagnostic
+information from the singular value decomposition is also returned.</p>
+</dd>
+<dt><strong>w</strong><span class="classifier">array_like, shape (<em class="xref py py-obj">M</em>,), optional</span></dt><dd><p>Weights. If not None, the contribution of each point
+<code class="docutils literal notranslate"><span class="pre">(x[i],y[i])</span></code> to the fit is weighted by <em class="xref py py-obj">w[i]</em>. Ideally the
+weights are chosen so that the errors of the products <code class="docutils literal notranslate"><span class="pre">w[i]*y[i]</span></code>
+all have the same variance.  The default value is None.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 1.5.0.</span></p>
+</div>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl>
+<dt><strong>coef</strong><span class="classifier">ndarray, shape (M,) or (M, K)</span></dt><dd><p>Chebyshev coefficients ordered from low to high. If <em class="xref py py-obj">y</em> was 2-D,
+the coefficients for the data in column k  of <em class="xref py py-obj">y</em> are in column
+<em class="xref py py-obj">k</em>.</p>
+</dd>
+<dt><strong>[residuals, rank, singular_values, rcond]</strong><span class="classifier">list</span></dt><dd><p>These values are only returned if <em class="xref py py-obj">full</em> = True</p>
+<p>resid – sum of squared residuals of the least squares fit
+rank – the numerical rank of the scaled Vandermonde matrix
+sv – singular values of the scaled Vandermonde matrix
+rcond – value of <em class="xref py py-obj">rcond</em>.</p>
+<p>For more details, see <em class="xref py py-obj">linalg.lstsq</em>.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">Warns</dt>
+<dd class="field-odd"><dl>
+<dt><strong>RankWarning</strong></dt><dd><p>The rank of the coefficient matrix in the least-squares fit is
+deficient. The warning is only raised if <em class="xref py py-obj">full</em> = False.  The
+warnings can be turned off by</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">warnings</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">RankWarning</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="alert alert-info">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-obj docutils literal notranslate"><span class="pre">polyfit</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">legfit</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">lagfit</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">hermfit</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">hermefit</span></code></p>
+<dl class="simple">
+<dt><a class="reference internal" href="numpy.polynomial.chebyshev.chebval.html#numpy.polynomial.chebyshev.chebval" title="numpy.polynomial.chebyshev.chebval"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chebval</span></code></a></dt><dd><p>Evaluates a Chebyshev series.</p>
+</dd>
+<dt><a class="reference internal" href="numpy.polynomial.chebyshev.chebvander.html#numpy.polynomial.chebyshev.chebvander" title="numpy.polynomial.chebyshev.chebvander"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chebvander</span></code></a></dt><dd><p>Vandermonde matrix of Chebyshev series.</p>
+</dd>
+<dt><a class="reference internal" href="numpy.polynomial.chebyshev.chebweight.html#numpy.polynomial.chebyshev.chebweight" title="numpy.polynomial.chebyshev.chebweight"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chebweight</span></code></a></dt><dd><p>Chebyshev weight function.</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">linalg.lstsq</span></code></dt><dd><p>Computes a least-squares fit from the matrix.</p>
+</dd>
+<dt><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.UnivariateSpline.html#scipy.interpolate.UnivariateSpline" title="(in SciPy v1.3.3)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scipy.interpolate.UnivariateSpline</span></code></a></dt><dd><p>Computes spline fits.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>The solution is the coefficients of the Chebyshev series <em class="xref py py-obj">p</em> that
+minimizes the sum of the weighted squared errors</p>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<span class="docutils literal">E = \sum_j w_j^2 * |y_j - p(x_j)|^2,
+
+</span>)</p>
+<p>latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2017-04-15&gt;
+Babel &lt;3.18&gt; and hyphenation patterns for 3 language(s) loaded.
+(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/size12.clo))
+(/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
+(/usr/share/texlive/texmf-dist/tex/latex/base/t1enc.dfu)
+(/usr/share/texlive/texmf-dist/tex/latex/base/ot1enc.dfu)
+(/usr/share/texlive/texmf-dist/tex/latex/base/omsenc.dfu)))
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/amscls/amsthm.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amssymb.sty
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty))
+
+! LaTeX Error: File `anyfontsize.sty' not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: sty)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.8 \usepackage
+               {bm}^^M
+No pages of output.
+Transcript written on math.log.
+</p>
+</div>
+<p>where <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<span class="docutils literal">w_j</span>)</p>
+<p>latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2017-04-15&gt;
+Babel &lt;3.18&gt; and hyphenation patterns for 3 language(s) loaded.
+(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/size12.clo))
+(/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
+(/usr/share/texlive/texmf-dist/tex/latex/base/t1enc.dfu)
+(/usr/share/texlive/texmf-dist/tex/latex/base/ot1enc.dfu)
+(/usr/share/texlive/texmf-dist/tex/latex/base/omsenc.dfu)))
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/amscls/amsthm.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amssymb.sty
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty))
+
+! LaTeX Error: File `anyfontsize.sty' not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: sty)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.8 \usepackage
+               {bm}^^M
+No pages of output.
+Transcript written on math.log.
+</p>
+</div>
+ are the weights. This problem is solved by setting up
+as the (typically) overdetermined matrix equation</p>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<span class="docutils literal">V(x) * c = w * y,
+
+</span>)</p>
+<p>latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2017-04-15&gt;
+Babel &lt;3.18&gt; and hyphenation patterns for 3 language(s) loaded.
+(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/size12.clo))
+(/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
+(/usr/share/texlive/texmf-dist/tex/latex/base/t1enc.dfu)
+(/usr/share/texlive/texmf-dist/tex/latex/base/ot1enc.dfu)
+(/usr/share/texlive/texmf-dist/tex/latex/base/omsenc.dfu)))
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/amscls/amsthm.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amssymb.sty
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty))
+
+! LaTeX Error: File `anyfontsize.sty' not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: sty)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.8 \usepackage
+               {bm}^^M
+No pages of output.
+Transcript written on math.log.
+</p>
+</div>
+<p>where <em class="xref py py-obj">V</em> is the weighted pseudo Vandermonde matrix of <em class="xref py py-obj">x</em>, <em class="xref py py-obj">c</em> are the
+coefficients to be solved for, <em class="xref py py-obj">w</em> are the weights, and <em class="xref py py-obj">y</em> are the
+observed values.  This equation is then solved using the singular value
+decomposition of <em class="xref py py-obj">V</em>.</p>
+<p>If some of the singular values of <em class="xref py py-obj">V</em> are so small that they are
+neglected, then a <em class="xref py py-obj">RankWarning</em> will be issued. This means that the
+coefficient values may be poorly determined. Using a lower order fit
+will usually get rid of the warning.  The <em class="xref py py-obj">rcond</em> parameter can also be
+set to a value smaller than its default, but the resulting fit may be
+spurious and have large contributions from roundoff error.</p>
+<p>Fits using Chebyshev series are usually better conditioned than fits
+using power series, but much can depend on the distribution of the
+sample points and the smoothness of the data. If the quality of the fit
+is inadequate splines may be a good alternative.</p>
+<p class="rubric">References</p>
+<dl class="citation">
+<dt class="label" id="r0f3b6a011c4f-1"><span class="brackets">1</span></dt>
+<dd><p>Wikipedia, “Curve fitting”,
+<a class="reference external" href="https://en.wikipedia.org/wiki/Curve_fitting">https://en.wikipedia.org/wiki/Curve_fitting</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+              </div>
+              <div class='prev-next-bottom'>
+                
+    <a class='left-prev' id="prev-link" href="numpy.polynomial.chebyshev.chebfromroots.html" title="previous page">numpy.polynomial.chebyshev.chebfromroots</a>
+    <a class='right-next' id="next-link" href="numpy.polynomial.chebyshev.chebvander.html" title="next page">numpy.polynomial.chebyshev.chebvander</a>
+
+              </div>
+          </main>
+
+      </div>
+    </div><script>
+    // TOC sidebar - add "active" class to parent list
+    //
+    // Bootstrap's scrollspy adds the active class to the <a> link,
+    // but for the automatic collapsing we need this on the parent list item.
+    //
+    // The event is triggered on "window" (and not the nav item as documented),
+    // see https://github.com/twbs/bootstrap/issues/20086
+    $(window).on("activate.bs.scrollspy", function(){
+    var navLinks = document.querySelectorAll('#bd-toc-nav a');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.remove('active');
+    }
+    var navLinks = document.querySelectorAll('#bd-toc-nav a.active');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.add('active');
+    }
+    });
+
+    /**
+     * Use left and right arrow keys to navigate forward and backwards.
+    */
+    const LEFT_ARROW_KEYCODE = 37
+    const RIGHT_ARROW_KEYCODE = 39
+
+    const getPrevUrl = () => document.getElementById('prev-link').href
+    const getNextUrl = () => document.getElementById('next-link').href
+    const initPageNav = (event) => {
+        const keycode = event.which
+
+        if (keycode === LEFT_ARROW_KEYCODE) {
+            window.location.href = getPrevUrl();
+        } else if (keycode === RIGHT_ARROW_KEYCODE) {
+            window.location.href = getNextUrl();
+        }
+    };
+
+    var keyboardListener = false;
+    $( document ).ready(() => {
+        if (keyboardListener === false) {
+            document.addEventListener('keydown', initPageNav)
+            keyboardListener = true;
+        }
+    });
+</script>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2008-2019, The SciPy community.
+      Last updated on Nov 29, 2019.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.1.
+    </div>
+<div class="footer-area footer--light">
+  <div class="footer-big">
+    <!-- start .container -->
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-12">
+          <div class="footer-widget">
+            <div class="widget-about">
+              <img src="../../_static/images/numpy_logo.svg" alt="NumPy logo" class="img-fluid">
+              <p>NumPy is the fundamental package needed for scientific computing with Python.</p>
+              <ul class="contact-details">
+                <li>
+                  <span class="icon-envelope-open"></span>
+                  <a href="https://mail.python.org/mailman/listinfo/numpy-discussion">
+                    Mailing list
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- Ends: .footer-widget -->
+        </div>
+        <!-- end /.col-md-4 -->
+        <div class="col-md-3 col-sm-4">
+          <div class="footer-widget">
+            <div class="footer-menu footer-menu--1">
+              <h4 class="footer-widget-title">About us</h4>
+              <ul>
+                <li>
+                  <a href="#">Our history</a>
+                </li>
+                <li>
+                  <a href="#">Ecosystem</a>
+                </li>
+                <li>
+                  <a href="#">Roadmap</a>
+                </li>
+                <li>
+                  <a href="#">Team</a>
+                </li>
+              </ul>
+            </div>
+            <!-- end /.footer-menu -->
+          </div>
+          <!-- Ends: .footer-widget -->
+        </div>
+        <!-- end /.col-md-3 -->
+
+        <div class="col-md-3 col-sm-4">
+          <div class="footer-widget">
+            <div class="footer-menu">
+              <h4 class="footer-widget-title">Community</h4>
+              <ul>
+                <li>
+                  <a href="#">Blog</a>
+                </li>
+                <li>
+                  <a href="#">Contributing</a>
+                </li>
+                <li>
+                  <a href="#">Code of conduct</a>
+                </li>
+                <li>
+                  <a href="#">Community survey</a>
+                </li>
+              </ul>
+            </div>
+            <!-- end /.footer-menu -->
+          </div>
+          <!-- Ends: .footer-widget -->
+        </div>
+        <!-- end /.col-lg-3 -->
+
+        <div class="col-md-3 col-sm-4">
+          <div class="footer-widget">
+            <div class="footer-menu no-padding">
+              <h4 class="footer-widget-title">Learning &  Documentation</h4>
+              <ul>
+                <li>
+                  <a href="#">User guide</a>
+                </li>
+                <li>
+                  <a href="#">API reference</a>
+                </li>
+                <li>
+                  <a href="#">Release notes</a>
+                </li>
+                <li>
+                  <a href="#">Tutorials</a>
+                </li>
+                <li>
+                  <a href="#">Videos</a>
+                </li>
+                <li>
+                  <a href="#">Books</a>
+                </li>
+                <li>
+                  <a href="#">Courses</a>
+                </li>
+              </ul>
+            </div>
+            <!-- end /.footer-menu -->
+          </div>
+          <!-- Ends: .footer-widget -->
+        </div>
+        <!-- Ends: .col-lg-3 -->
+
+      </div>
+      <!-- end /.row -->
+    </div>
+    <!-- end /.container -->
+  </div>
+  <!-- end /.footer-big -->
+
+  <div class="mini-footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="copyright-text">
+            <p>&copy; <span id="year"></span>
+              <a href="#">NumPy Developers</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </body>
+</html>

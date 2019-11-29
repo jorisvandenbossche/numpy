@@ -1,0 +1,640 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Optionally Scipy-accelerated routines (numpy.dual) &#8212; NumPy v1.18.dev0 Manual</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="../_static/sphinx-bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/extra-footer.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom_theme.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/code-highlight.css" />
+    <link href="../_static/css/custom.css" rel="stylesheet">
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Mathematical functions with automatic domain (numpy.emath)" href="routines.emath.html" />
+    <link rel="prev" title="numpy.maximum_sctype" href="generated/numpy.maximum_sctype.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+
+<a class="navbar-brand" href="../index.html">
+  <img src="../_static/numpy_logo.png" class="logo" alt="logo">
+</a>
+
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+</button>
+
+<div id="navbar-menu" class="collapse navbar-collapse">
+  <ul id="navbar-main-elements" class="navbar-nav mr-auto">
+    <li class="nav-item">
+        <a class="nav-link" href="../index.html">Home</a>
+    </li>
+    
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../user/index.html">User Guide</a>
+    </li>
+    
+    <li class="nav-item active">
+        <a class="nav-link" href="index.html">NumPy Reference</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../dev/index.html">Contributing to NumPy</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../release.html">Release Notes</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../about.html">About NumPy</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href=""></a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../bugs.html">Reporting bugs</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../glossary.html">Glossary</a>
+    </li>
+    
+  </ul>
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+      <a class="nav-link" href="https://github.com/pandas-dev/pandas" target="_blank" rel="noopener">
+        <span><i class="fab fa-github-alt" style="color:#333;font-size:1rem;line-height:1.25"></i></span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="https://twitter.com/pandas_dev" target="_blank" rel="noopener">
+        <span><i class="fab fa-twitter" style="color:#55acee;font-size:1rem;line-height:1.25"></i></span>
+      </a>
+    </li>
+  </ul>
+</div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row flex-xl-nowrap">
+          <div class="col-12 col-md-3 col-xl-2 bd-sidebar">
+              
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+  <div class="bd-toc-item active">
+  
+
+  <ul class="nav bd-sidenav">
+      
+      
+      
+      
+        
+          
+              <li class="">
+                  <a href="arrays.html">Array objects</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="constants.html">Constants</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="ufuncs.html">Universal functions (ufunc)</a>
+              </li>
+          
+        
+          
+    
+              <li class="active">
+                  <a href="routines.html">Routines</a>
+                  <ul>
+                  
+                      <li class="">
+                          <a href="routines.array-creation.html">Array creation routines</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="routines.array-manipulation.html">Array manipulation routines</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="routines.bitwise.html">Binary operations</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="routines.char.html">String operations</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="routines.ctypeslib.html">C-Types Foreign Function Interface (numpy.ctypeslib)</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="routines.datetime.html">Datetime Support Functions</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="routines.dtype.html">Data type routines</a>
+                      </li>
+                  
+                      <li class="active">
+                          <a href="">Optionally Scipy-accelerated routines (numpy.dual)</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="routines.emath.html">Mathematical functions with automatic domain (numpy.emath)</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="routines.err.html">Floating point error handling</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="routines.fft.html">Discrete Fourier Transform (numpy.fft)</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="routines.financial.html">Financial functions</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="routines.functional.html">Functional programming</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="routines.help.html">NumPy-specific help functions</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="routines.indexing.html">Indexing routines</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="routines.io.html">Input and output</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="routines.linalg.html">Linear algebra (numpy.linalg)</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="routines.logic.html">Logic functions</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="routines.ma.html">Masked array operations</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="routines.math.html">Mathematical functions</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="routines.matlib.html">Matrix library (numpy.matlib)</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="routines.other.html">Miscellaneous routines</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="routines.padding.html">Padding Arrays</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="routines.polynomials.html">Polynomials</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="random/index.html">Random sampling (numpy.random)</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="routines.set.html">Set routines</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="routines.sort.html">Sorting, searching, and counting</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="routines.statistics.html">Statistics</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="routines.testing.html">Test Support (numpy.testing)</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="routines.window.html">Window functions</a>
+                      </li>
+                  
+                  </ul>
+              </li> 
+          
+        
+          
+              <li class="">
+                  <a href="distutils.html">Packaging (numpy.distutils)</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="distutils_guide.html">NumPy Distutils - Users Guide</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="c-api/index.html">NumPy C-API</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="internals.html">NumPy internals</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="swig.html">NumPy and SWIG</a>
+              </li>
+          
+        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </ul>
+
+</nav>
+
+
+              
+          </div>
+
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+              
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#linear-algebra" class="nav-link">Linear algebra</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#fft" class="nav-link">FFT</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#other" class="nav-link">Other</a>
+        </li>
+    
+    </ul>
+</nav>
+              
+            </div>
+
+          <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">
+              <div>
+                
+  <div class="section" id="module-numpy.dual">
+<span id="optionally-scipy-accelerated-routines-numpy-dual"></span><h1>Optionally Scipy-accelerated routines (<a class="reference internal" href="#module-numpy.dual" title="numpy.dual"><code class="xref py py-mod docutils literal notranslate"><span class="pre">numpy.dual</span></code></a>)<a class="headerlink" href="#module-numpy.dual" title="Permalink to this headline">¶</a></h1>
+<p>Aliases for functions which may be accelerated by Scipy.</p>
+<p><a class="reference external" href="https://www.scipy.org">Scipy</a> can be built to use accelerated or otherwise improved libraries
+for FFTs, linear algebra, and special functions. This module allows
+developers to transparently support these accelerated functions when
+scipy is available but still support users who have only installed
+NumPy.</p>
+<div class="section" id="linear-algebra">
+<h2>Linear algebra<a class="headerlink" href="#linear-algebra" title="Permalink to this headline">¶</a></h2>
+<table class="longtable table">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/numpy.linalg.cholesky.html#numpy.linalg.cholesky" title="numpy.linalg.cholesky"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cholesky</span></code></a>(a)</p></td>
+<td><p>Cholesky decomposition.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/numpy.linalg.det.html#numpy.linalg.det" title="numpy.linalg.det"><code class="xref py py-obj docutils literal notranslate"><span class="pre">det</span></code></a>(a)</p></td>
+<td><p>Compute the determinant of an array.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/numpy.linalg.eig.html#numpy.linalg.eig" title="numpy.linalg.eig"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eig</span></code></a>(a)</p></td>
+<td><p>Compute the eigenvalues and right eigenvectors of a square array.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/numpy.linalg.eigh.html#numpy.linalg.eigh" title="numpy.linalg.eigh"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eigh</span></code></a>(a[, UPLO])</p></td>
+<td><p>Return the eigenvalues and eigenvectors of a complex Hermitian (conjugate symmetric) or a real symmetric matrix.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/numpy.linalg.eigvals.html#numpy.linalg.eigvals" title="numpy.linalg.eigvals"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eigvals</span></code></a>(a)</p></td>
+<td><p>Compute the eigenvalues of a general matrix.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/numpy.linalg.eigvalsh.html#numpy.linalg.eigvalsh" title="numpy.linalg.eigvalsh"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eigvalsh</span></code></a>(a[, UPLO])</p></td>
+<td><p>Compute the eigenvalues of a complex Hermitian or real symmetric matrix.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/numpy.linalg.inv.html#numpy.linalg.inv" title="numpy.linalg.inv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">inv</span></code></a>(a)</p></td>
+<td><p>Compute the (multiplicative) inverse of a matrix.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/numpy.linalg.lstsq.html#numpy.linalg.lstsq" title="numpy.linalg.lstsq"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lstsq</span></code></a>(a, b[, rcond])</p></td>
+<td><p>Return the least-squares solution to a linear matrix equation.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/numpy.linalg.norm.html#numpy.linalg.norm" title="numpy.linalg.norm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">norm</span></code></a>(x[, ord, axis, keepdims])</p></td>
+<td><p>Matrix or vector norm.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/numpy.linalg.pinv.html#numpy.linalg.pinv" title="numpy.linalg.pinv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pinv</span></code></a>(a[, rcond, hermitian])</p></td>
+<td><p>Compute the (Moore-Penrose) pseudo-inverse of a matrix.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/numpy.linalg.solve.html#numpy.linalg.solve" title="numpy.linalg.solve"><code class="xref py py-obj docutils literal notranslate"><span class="pre">solve</span></code></a>(a, b)</p></td>
+<td><p>Solve a linear matrix equation, or system of linear scalar equations.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/numpy.linalg.svd.html#numpy.linalg.svd" title="numpy.linalg.svd"><code class="xref py py-obj docutils literal notranslate"><span class="pre">svd</span></code></a>(a[, full_matrices, compute_uv, hermitian])</p></td>
+<td><p>Singular Value Decomposition.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="fft">
+<h2>FFT<a class="headerlink" href="#fft" title="Permalink to this headline">¶</a></h2>
+<table class="longtable table">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/numpy.fft.fft.html#numpy.fft.fft" title="numpy.fft.fft"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fft</span></code></a>(a[, n, axis, norm])</p></td>
+<td><p>Compute the one-dimensional discrete Fourier Transform.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/numpy.fft.fft2.html#numpy.fft.fft2" title="numpy.fft.fft2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fft2</span></code></a>(a[, s, axes, norm])</p></td>
+<td><p>Compute the 2-dimensional discrete Fourier Transform</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/numpy.fft.fftn.html#numpy.fft.fftn" title="numpy.fft.fftn"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fftn</span></code></a>(a[, s, axes, norm])</p></td>
+<td><p>Compute the N-dimensional discrete Fourier Transform.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/numpy.fft.ifft.html#numpy.fft.ifft" title="numpy.fft.ifft"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ifft</span></code></a>(a[, n, axis, norm])</p></td>
+<td><p>Compute the one-dimensional inverse discrete Fourier Transform.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/numpy.fft.ifft2.html#numpy.fft.ifft2" title="numpy.fft.ifft2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ifft2</span></code></a>(a[, s, axes, norm])</p></td>
+<td><p>Compute the 2-dimensional inverse discrete Fourier Transform.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/numpy.fft.ifftn.html#numpy.fft.ifftn" title="numpy.fft.ifftn"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ifftn</span></code></a>(a[, s, axes, norm])</p></td>
+<td><p>Compute the N-dimensional inverse discrete Fourier Transform.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="other">
+<h2>Other<a class="headerlink" href="#other" title="Permalink to this headline">¶</a></h2>
+<table class="longtable table">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/numpy.i0.html#numpy.i0" title="numpy.i0"><code class="xref py py-obj docutils literal notranslate"><span class="pre">i0</span></code></a>(x)</p></td>
+<td><p>Modified Bessel function of the first kind, order 0.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+              </div>
+              <div class='prev-next-bottom'>
+                
+    <a class='left-prev' id="prev-link" href="generated/numpy.maximum_sctype.html" title="previous page">numpy.maximum_sctype</a>
+    <a class='right-next' id="next-link" href="routines.emath.html" title="next page">Mathematical functions with automatic domain (<code class="xref py py-mod docutils literal notranslate"><span class="pre">numpy.emath</span></code>)</a>
+
+              </div>
+          </main>
+
+      </div>
+    </div><script>
+    // TOC sidebar - add "active" class to parent list
+    //
+    // Bootstrap's scrollspy adds the active class to the <a> link,
+    // but for the automatic collapsing we need this on the parent list item.
+    //
+    // The event is triggered on "window" (and not the nav item as documented),
+    // see https://github.com/twbs/bootstrap/issues/20086
+    $(window).on("activate.bs.scrollspy", function(){
+    var navLinks = document.querySelectorAll('#bd-toc-nav a');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.remove('active');
+    }
+    var navLinks = document.querySelectorAll('#bd-toc-nav a.active');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.add('active');
+    }
+    });
+
+    /**
+     * Use left and right arrow keys to navigate forward and backwards.
+    */
+    const LEFT_ARROW_KEYCODE = 37
+    const RIGHT_ARROW_KEYCODE = 39
+
+    const getPrevUrl = () => document.getElementById('prev-link').href
+    const getNextUrl = () => document.getElementById('next-link').href
+    const initPageNav = (event) => {
+        const keycode = event.which
+
+        if (keycode === LEFT_ARROW_KEYCODE) {
+            window.location.href = getPrevUrl();
+        } else if (keycode === RIGHT_ARROW_KEYCODE) {
+            window.location.href = getNextUrl();
+        }
+    };
+
+    var keyboardListener = false;
+    $( document ).ready(() => {
+        if (keyboardListener === false) {
+            document.addEventListener('keydown', initPageNav)
+            keyboardListener = true;
+        }
+    });
+</script>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2008-2019, The SciPy community.
+      Last updated on Nov 29, 2019.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.1.
+    </div>
+<div class="footer-area footer--light">
+  <div class="footer-big">
+    <!-- start .container -->
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-12">
+          <div class="footer-widget">
+            <div class="widget-about">
+              <img src="../_static/images/numpy_logo.svg" alt="NumPy logo" class="img-fluid">
+              <p>NumPy is the fundamental package needed for scientific computing with Python.</p>
+              <ul class="contact-details">
+                <li>
+                  <span class="icon-envelope-open"></span>
+                  <a href="https://mail.python.org/mailman/listinfo/numpy-discussion">
+                    Mailing list
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- Ends: .footer-widget -->
+        </div>
+        <!-- end /.col-md-4 -->
+        <div class="col-md-3 col-sm-4">
+          <div class="footer-widget">
+            <div class="footer-menu footer-menu--1">
+              <h4 class="footer-widget-title">About us</h4>
+              <ul>
+                <li>
+                  <a href="#">Our history</a>
+                </li>
+                <li>
+                  <a href="#">Ecosystem</a>
+                </li>
+                <li>
+                  <a href="#">Roadmap</a>
+                </li>
+                <li>
+                  <a href="#">Team</a>
+                </li>
+              </ul>
+            </div>
+            <!-- end /.footer-menu -->
+          </div>
+          <!-- Ends: .footer-widget -->
+        </div>
+        <!-- end /.col-md-3 -->
+
+        <div class="col-md-3 col-sm-4">
+          <div class="footer-widget">
+            <div class="footer-menu">
+              <h4 class="footer-widget-title">Community</h4>
+              <ul>
+                <li>
+                  <a href="#">Blog</a>
+                </li>
+                <li>
+                  <a href="#">Contributing</a>
+                </li>
+                <li>
+                  <a href="#">Code of conduct</a>
+                </li>
+                <li>
+                  <a href="#">Community survey</a>
+                </li>
+              </ul>
+            </div>
+            <!-- end /.footer-menu -->
+          </div>
+          <!-- Ends: .footer-widget -->
+        </div>
+        <!-- end /.col-lg-3 -->
+
+        <div class="col-md-3 col-sm-4">
+          <div class="footer-widget">
+            <div class="footer-menu no-padding">
+              <h4 class="footer-widget-title">Learning &  Documentation</h4>
+              <ul>
+                <li>
+                  <a href="#">User guide</a>
+                </li>
+                <li>
+                  <a href="#">API reference</a>
+                </li>
+                <li>
+                  <a href="#">Release notes</a>
+                </li>
+                <li>
+                  <a href="#">Tutorials</a>
+                </li>
+                <li>
+                  <a href="#">Videos</a>
+                </li>
+                <li>
+                  <a href="#">Books</a>
+                </li>
+                <li>
+                  <a href="#">Courses</a>
+                </li>
+              </ul>
+            </div>
+            <!-- end /.footer-menu -->
+          </div>
+          <!-- Ends: .footer-widget -->
+        </div>
+        <!-- Ends: .col-lg-3 -->
+
+      </div>
+      <!-- end /.row -->
+    </div>
+    <!-- end /.container -->
+  </div>
+  <!-- end /.footer-big -->
+
+  <div class="mini-footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="copyright-text">
+            <p>&copy; <span id="year"></span>
+              <a href="#">NumPy Developers</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </body>
+</html>

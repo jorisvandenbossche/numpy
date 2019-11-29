@@ -1,0 +1,521 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Getting started with Git development &#8212; NumPy v1.18.dev0 Manual</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../_static/sphinx-bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/extra-footer.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/custom_theme.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/code-highlight.css" />
+    <link href="../../_static/css/custom.css" rel="stylesheet">
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Git configuration" href="configure_git.html" />
+    <link rel="prev" title="Get the local copy of the code" href="following_latest.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+
+<a class="navbar-brand" href="../../index.html">
+  <img src="../../_static/numpy_logo.png" class="logo" alt="logo">
+</a>
+
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+</button>
+
+<div id="navbar-menu" class="collapse navbar-collapse">
+  <ul id="navbar-main-elements" class="navbar-nav mr-auto">
+    <li class="nav-item">
+        <a class="nav-link" href="../../index.html">Home</a>
+    </li>
+    
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../user/index.html">User Guide</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../reference/index.html">NumPy Reference</a>
+    </li>
+    
+    <li class="nav-item active">
+        <a class="nav-link" href="../index.html">Contributing to NumPy</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../release.html">Release Notes</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../about.html">About NumPy</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href=""></a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../bugs.html">Reporting bugs</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../glossary.html">Glossary</a>
+    </li>
+    
+  </ul>
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+      <a class="nav-link" href="https://github.com/pandas-dev/pandas" target="_blank" rel="noopener">
+        <span><i class="fab fa-github-alt" style="color:#333;font-size:1rem;line-height:1.25"></i></span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="https://twitter.com/pandas_dev" target="_blank" rel="noopener">
+        <span><i class="fab fa-twitter" style="color:#55acee;font-size:1rem;line-height:1.25"></i></span>
+      </a>
+    </li>
+  </ul>
+</div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row flex-xl-nowrap">
+          <div class="col-12 col-md-3 col-xl-2 bd-sidebar">
+              
+
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+  <div class="bd-toc-item active">
+  
+
+  <ul class="nav bd-sidenav">
+      
+      
+      
+      
+      
+      
+        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </ul>
+
+</nav>
+
+
+              
+          </div>
+
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+              
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#basic-git-setup" class="nav-link">Basic Git setup</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#making-your-own-copy-fork-of-numpy" class="nav-link">Making your own copy (fork) of NumPy</a><ul class="nav section-nav flex-column">
+                
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#set-up-and-configure-a-github-account" class="nav-link">Set up and configure a github account</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#create-your-own-forked-copy-of-numpy" class="nav-link">Create your own forked copy of NumPy</a>
+        </li>
+    
+            </ul>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#set-up-your-fork" class="nav-link">Set up your fork</a><ul class="nav section-nav flex-column">
+                
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#overview" class="nav-link">Overview</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#in-detail" class="nav-link">In detail</a><ul class="nav section-nav flex-column">
+                
+        <li class="nav-item toc-entry toc-h4">
+            <a href="#clone-your-fork" class="nav-link">Clone your fork</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h4">
+            <a href="#linking-your-repository-to-the-upstream-repo" class="nav-link">Linking your repository to the upstream repo</a>
+        </li>
+    
+            </ul>
+        </li>
+    
+            </ul>
+        </li>
+    
+    </ul>
+</nav>
+              
+            </div>
+
+          <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">
+              <div>
+                
+  <div class="section" id="getting-started-with-git-development">
+<h1>Getting started with Git development<a class="headerlink" href="#getting-started-with-git-development" title="Permalink to this headline">¶</a></h1>
+<p>This section and the next describe in detail how to set up git for working
+with the NumPy source code.  If you have git already set up, skip to
+<a class="reference internal" href="../development_workflow.html#development-workflow"><span class="std std-ref">Development workflow</span></a>.</p>
+<div class="section" id="basic-git-setup">
+<h2>Basic Git setup<a class="headerlink" href="#basic-git-setup" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p><a class="reference external" href="https://matplotlib.org/devel/gitwash/git_install.html#install-git" title="(in Matplotlib v3.1.1)"><span>Install git</span></a>.</p></li>
+<li><p>Introduce yourself to Git:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">user</span><span class="o">.</span><span class="n">email</span> <span class="n">you</span><span class="nd">@yourdomain</span><span class="o">.</span><span class="n">example</span><span class="o">.</span><span class="n">com</span>
+<span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">user</span><span class="o">.</span><span class="n">name</span> <span class="s2">&quot;Your Name Comes Here&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="making-your-own-copy-fork-of-numpy">
+<span id="forking"></span><h2>Making your own copy (fork) of NumPy<a class="headerlink" href="#making-your-own-copy-fork-of-numpy" title="Permalink to this headline">¶</a></h2>
+<p>You need to do this only once.  The instructions here are very similar
+to the instructions at <a class="reference external" href="http://help.github.com/forking/">http://help.github.com/forking/</a> - please see that
+page for more detail.  We’re repeating some of it here just to give the
+specifics for the <a class="reference external" href="https://www.numpy.org">NumPy</a> project, and to suggest some default names.</p>
+<div class="section" id="set-up-and-configure-a-github-account">
+<span id="id1"></span><h3>Set up and configure a <a class="reference external" href="https://github.com/numpy/numpy">github</a> account<a class="headerlink" href="#set-up-and-configure-a-github-account" title="Permalink to this headline">¶</a></h3>
+<p>If you don’t have a <a class="reference external" href="https://github.com/numpy/numpy">github</a> account, go to the <a class="reference external" href="https://github.com/numpy/numpy">github</a> page, and make one.</p>
+<p>You then need to configure your account to allow write access - see the
+<code class="docutils literal notranslate"><span class="pre">Generating</span> <span class="pre">SSH</span> <span class="pre">keys</span></code> help on <a class="reference external" href="https://help.github.com">github help</a>.</p>
+</div>
+<div class="section" id="create-your-own-forked-copy-of-numpy">
+<h3>Create your own forked copy of <a class="reference external" href="https://www.numpy.org">NumPy</a><a class="headerlink" href="#create-your-own-forked-copy-of-numpy" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p>Log into your <a class="reference external" href="https://github.com/numpy/numpy">github</a> account.</p></li>
+<li><p>Go to the <a class="reference external" href="https://www.numpy.org">NumPy</a> github home at <a class="reference external" href="https://github.com/numpy/numpy">NumPy github</a>.</p></li>
+<li><p>Click on the <em>fork</em> button:</p>
+<img alt="../../_images/forking_button.png" src="../../_images/forking_button.png" />
+<p>After a short pause, you should find yourself at the home page for
+your own forked copy of <a class="reference external" href="https://www.numpy.org">NumPy</a>.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="set-up-your-fork">
+<span id="set-up-fork"></span><h2>Set up your fork<a class="headerlink" href="#set-up-your-fork" title="Permalink to this headline">¶</a></h2>
+<p>First you follow the instructions for <a class="reference internal" href="#forking"><span class="std std-ref">Making your own copy (fork) of NumPy</span></a>.</p>
+<div class="section" id="overview">
+<h3>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">your</span><span class="o">-</span><span class="n">user</span><span class="o">-</span><span class="n">name</span><span class="o">/</span><span class="n">numpy</span><span class="o">.</span><span class="n">git</span>
+<span class="n">cd</span> <span class="n">numpy</span>
+<span class="n">git</span> <span class="n">remote</span> <span class="n">add</span> <span class="n">upstream</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">numpy</span><span class="o">/</span><span class="n">numpy</span><span class="o">.</span><span class="n">git</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="in-detail">
+<h3>In detail<a class="headerlink" href="#in-detail" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="clone-your-fork">
+<h4>Clone your fork<a class="headerlink" href="#clone-your-fork" title="Permalink to this headline">¶</a></h4>
+<ol class="arabic">
+<li><p>Clone your fork to the local computer with <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span>
+<span class="pre">https://github.com/your-user-name/numpy.git</span></code></p></li>
+<li><p>Investigate.  Change directory to your new repo: <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">numpy</span></code>. Then
+<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">branch</span> <span class="pre">-a</span></code> to show you all branches.  You’ll get something
+like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span> <span class="n">master</span>
+<span class="n">remotes</span><span class="o">/</span><span class="n">origin</span><span class="o">/</span><span class="n">master</span>
+</pre></div>
+</div>
+<p>This tells you that you are currently on the <code class="docutils literal notranslate"><span class="pre">master</span></code> branch, and
+that you also have a <code class="docutils literal notranslate"><span class="pre">remote</span></code> connection to <code class="docutils literal notranslate"><span class="pre">origin/master</span></code>.
+What remote repository is <code class="docutils literal notranslate"><span class="pre">remote/origin</span></code>? Try <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">remote</span> <span class="pre">-v</span></code> to
+see the URLs for the remote.  They will point to your <a class="reference external" href="https://github.com/numpy/numpy">github</a> fork.</p>
+<p>Now you want to connect to the upstream <a class="reference external" href="https://github.com/numpy/numpy">NumPy github</a> repository, so
+you can merge in changes from trunk.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="linking-your-repository-to-the-upstream-repo">
+<span id="linking-to-upstream"></span><h4>Linking your repository to the upstream repo<a class="headerlink" href="#linking-your-repository-to-the-upstream-repo" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">numpy</span>
+<span class="n">git</span> <span class="n">remote</span> <span class="n">add</span> <span class="n">upstream</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">numpy</span><span class="o">/</span><span class="n">numpy</span><span class="o">.</span><span class="n">git</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">upstream</span></code> here is just the arbitrary name we’re using to refer to the
+main <a class="reference external" href="https://www.numpy.org">NumPy</a> repository at <a class="reference external" href="https://github.com/numpy/numpy">NumPy github</a>.</p>
+<p>Just for your own satisfaction, show yourself that you now have a new
+‘remote’, with <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">remote</span> <span class="pre">-v</span> <span class="pre">show</span></code>, giving you something like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">upstream</span>     <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">numpy</span><span class="o">/</span><span class="n">numpy</span><span class="o">.</span><span class="n">git</span> <span class="p">(</span><span class="n">fetch</span><span class="p">)</span>
+<span class="n">upstream</span>     <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">numpy</span><span class="o">/</span><span class="n">numpy</span><span class="o">.</span><span class="n">git</span> <span class="p">(</span><span class="n">push</span><span class="p">)</span>
+<span class="n">origin</span>       <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">your</span><span class="o">-</span><span class="n">user</span><span class="o">-</span><span class="n">name</span><span class="o">/</span><span class="n">numpy</span><span class="o">.</span><span class="n">git</span> <span class="p">(</span><span class="n">fetch</span><span class="p">)</span>
+<span class="n">origin</span>       <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">your</span><span class="o">-</span><span class="n">user</span><span class="o">-</span><span class="n">name</span><span class="o">/</span><span class="n">numpy</span><span class="o">.</span><span class="n">git</span> <span class="p">(</span><span class="n">push</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>To keep in sync with changes in NumPy, you want to set up your repository
+so it pulls from <code class="docutils literal notranslate"><span class="pre">upstream</span></code> by default.  This can be done with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">config</span> <span class="n">branch</span><span class="o">.</span><span class="n">master</span><span class="o">.</span><span class="n">remote</span> <span class="n">upstream</span>
+<span class="n">git</span> <span class="n">config</span> <span class="n">branch</span><span class="o">.</span><span class="n">master</span><span class="o">.</span><span class="n">merge</span> <span class="n">refs</span><span class="o">/</span><span class="n">heads</span><span class="o">/</span><span class="n">master</span>
+</pre></div>
+</div>
+<p>You may also want to have easy access to all pull requests sent to the
+NumPy repository:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="n">add</span> <span class="n">remote</span><span class="o">.</span><span class="n">upstream</span><span class="o">.</span><span class="n">fetch</span> <span class="s1">&#39;+refs/pull/*/head:refs/remotes/upstream/pr/*&#39;</span>
+</pre></div>
+</div>
+<p>Your config file should now look something like (from
+<code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">cat</span> <span class="pre">.git/config</span></code>):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">core</span><span class="p">]</span>
+        <span class="n">repositoryformatversion</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">filemode</span> <span class="o">=</span> <span class="n">true</span>
+        <span class="n">bare</span> <span class="o">=</span> <span class="n">false</span>
+        <span class="n">logallrefupdates</span> <span class="o">=</span> <span class="n">true</span>
+        <span class="n">ignorecase</span> <span class="o">=</span> <span class="n">true</span>
+        <span class="n">precomposeunicode</span> <span class="o">=</span> <span class="n">false</span>
+<span class="p">[</span><span class="n">remote</span> <span class="s2">&quot;origin&quot;</span><span class="p">]</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">your</span><span class="o">-</span><span class="n">user</span><span class="o">-</span><span class="n">name</span><span class="o">/</span><span class="n">numpy</span><span class="o">.</span><span class="n">git</span>
+        <span class="n">fetch</span> <span class="o">=</span> <span class="o">+</span><span class="n">refs</span><span class="o">/</span><span class="n">heads</span><span class="o">/*</span><span class="p">:</span><span class="n">refs</span><span class="o">/</span><span class="n">remotes</span><span class="o">/</span><span class="n">origin</span><span class="o">/*</span>
+<span class="p">[</span><span class="n">remote</span> <span class="s2">&quot;upstream&quot;</span><span class="p">]</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">numpy</span><span class="o">/</span><span class="n">numpy</span><span class="o">.</span><span class="n">git</span>
+        <span class="n">fetch</span> <span class="o">=</span> <span class="o">+</span><span class="n">refs</span><span class="o">/</span><span class="n">heads</span><span class="o">/*</span><span class="p">:</span><span class="n">refs</span><span class="o">/</span><span class="n">remotes</span><span class="o">/</span><span class="n">upstream</span><span class="o">/*</span>
+        <span class="n">fetch</span> <span class="o">=</span> <span class="o">+</span><span class="n">refs</span><span class="o">/</span><span class="n">pull</span><span class="o">/*/</span><span class="n">head</span><span class="p">:</span><span class="n">refs</span><span class="o">/</span><span class="n">remotes</span><span class="o">/</span><span class="n">upstream</span><span class="o">/</span><span class="n">pr</span><span class="o">/*</span>
+<span class="p">[</span><span class="n">branch</span> <span class="s2">&quot;master&quot;</span><span class="p">]</span>
+        <span class="n">remote</span> <span class="o">=</span> <span class="n">upstream</span>
+        <span class="n">merge</span> <span class="o">=</span> <span class="n">refs</span><span class="o">/</span><span class="n">heads</span><span class="o">/</span><span class="n">master</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+              </div>
+              <div class='prev-next-bottom'>
+                
+    <a class='left-prev' id="prev-link" href="following_latest.html" title="previous page">Get the local copy of the code</a>
+    <a class='right-next' id="next-link" href="configure_git.html" title="next page">Git configuration</a>
+
+              </div>
+          </main>
+
+      </div>
+    </div><script>
+    // TOC sidebar - add "active" class to parent list
+    //
+    // Bootstrap's scrollspy adds the active class to the <a> link,
+    // but for the automatic collapsing we need this on the parent list item.
+    //
+    // The event is triggered on "window" (and not the nav item as documented),
+    // see https://github.com/twbs/bootstrap/issues/20086
+    $(window).on("activate.bs.scrollspy", function(){
+    var navLinks = document.querySelectorAll('#bd-toc-nav a');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.remove('active');
+    }
+    var navLinks = document.querySelectorAll('#bd-toc-nav a.active');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.add('active');
+    }
+    });
+
+    /**
+     * Use left and right arrow keys to navigate forward and backwards.
+    */
+    const LEFT_ARROW_KEYCODE = 37
+    const RIGHT_ARROW_KEYCODE = 39
+
+    const getPrevUrl = () => document.getElementById('prev-link').href
+    const getNextUrl = () => document.getElementById('next-link').href
+    const initPageNav = (event) => {
+        const keycode = event.which
+
+        if (keycode === LEFT_ARROW_KEYCODE) {
+            window.location.href = getPrevUrl();
+        } else if (keycode === RIGHT_ARROW_KEYCODE) {
+            window.location.href = getNextUrl();
+        }
+    };
+
+    var keyboardListener = false;
+    $( document ).ready(() => {
+        if (keyboardListener === false) {
+            document.addEventListener('keydown', initPageNav)
+            keyboardListener = true;
+        }
+    });
+</script>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2008-2019, The SciPy community.
+      Last updated on Nov 29, 2019.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.1.
+    </div>
+<div class="footer-area footer--light">
+  <div class="footer-big">
+    <!-- start .container -->
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-12">
+          <div class="footer-widget">
+            <div class="widget-about">
+              <img src="../../_static/images/numpy_logo.svg" alt="NumPy logo" class="img-fluid">
+              <p>NumPy is the fundamental package needed for scientific computing with Python.</p>
+              <ul class="contact-details">
+                <li>
+                  <span class="icon-envelope-open"></span>
+                  <a href="https://mail.python.org/mailman/listinfo/numpy-discussion">
+                    Mailing list
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- Ends: .footer-widget -->
+        </div>
+        <!-- end /.col-md-4 -->
+        <div class="col-md-3 col-sm-4">
+          <div class="footer-widget">
+            <div class="footer-menu footer-menu--1">
+              <h4 class="footer-widget-title">About us</h4>
+              <ul>
+                <li>
+                  <a href="#">Our history</a>
+                </li>
+                <li>
+                  <a href="#">Ecosystem</a>
+                </li>
+                <li>
+                  <a href="#">Roadmap</a>
+                </li>
+                <li>
+                  <a href="#">Team</a>
+                </li>
+              </ul>
+            </div>
+            <!-- end /.footer-menu -->
+          </div>
+          <!-- Ends: .footer-widget -->
+        </div>
+        <!-- end /.col-md-3 -->
+
+        <div class="col-md-3 col-sm-4">
+          <div class="footer-widget">
+            <div class="footer-menu">
+              <h4 class="footer-widget-title">Community</h4>
+              <ul>
+                <li>
+                  <a href="#">Blog</a>
+                </li>
+                <li>
+                  <a href="#">Contributing</a>
+                </li>
+                <li>
+                  <a href="#">Code of conduct</a>
+                </li>
+                <li>
+                  <a href="#">Community survey</a>
+                </li>
+              </ul>
+            </div>
+            <!-- end /.footer-menu -->
+          </div>
+          <!-- Ends: .footer-widget -->
+        </div>
+        <!-- end /.col-lg-3 -->
+
+        <div class="col-md-3 col-sm-4">
+          <div class="footer-widget">
+            <div class="footer-menu no-padding">
+              <h4 class="footer-widget-title">Learning &  Documentation</h4>
+              <ul>
+                <li>
+                  <a href="#">User guide</a>
+                </li>
+                <li>
+                  <a href="#">API reference</a>
+                </li>
+                <li>
+                  <a href="#">Release notes</a>
+                </li>
+                <li>
+                  <a href="#">Tutorials</a>
+                </li>
+                <li>
+                  <a href="#">Videos</a>
+                </li>
+                <li>
+                  <a href="#">Books</a>
+                </li>
+                <li>
+                  <a href="#">Courses</a>
+                </li>
+              </ul>
+            </div>
+            <!-- end /.footer-menu -->
+          </div>
+          <!-- Ends: .footer-widget -->
+        </div>
+        <!-- Ends: .col-lg-3 -->
+
+      </div>
+      <!-- end /.row -->
+    </div>
+    <!-- end /.container -->
+  </div>
+  <!-- end /.footer-big -->
+
+  <div class="mini-footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="copyright-text">
+            <p>&copy; <span id="year"></span>
+              <a href="#">NumPy Developers</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </body>
+</html>

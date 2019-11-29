@@ -1,0 +1,806 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>The Array Interface &#8212; NumPy v1.18.dev0 Manual</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="../_static/sphinx-bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/extra-footer.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom_theme.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/code-highlight.css" />
+    <link href="../_static/css/custom.css" rel="stylesheet">
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Datetimes and Timedeltas" href="arrays.datetime.html" />
+    <link rel="prev" title="numpy.ma.where" href="generated/numpy.ma.where.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+
+<a class="navbar-brand" href="../index.html">
+  <img src="../_static/numpy_logo.png" class="logo" alt="logo">
+</a>
+
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+</button>
+
+<div id="navbar-menu" class="collapse navbar-collapse">
+  <ul id="navbar-main-elements" class="navbar-nav mr-auto">
+    <li class="nav-item">
+        <a class="nav-link" href="../index.html">Home</a>
+    </li>
+    
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../user/index.html">User Guide</a>
+    </li>
+    
+    <li class="nav-item active">
+        <a class="nav-link" href="index.html">NumPy Reference</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../dev/index.html">Contributing to NumPy</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../release.html">Release Notes</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../about.html">About NumPy</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href=""></a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../bugs.html">Reporting bugs</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../glossary.html">Glossary</a>
+    </li>
+    
+  </ul>
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+      <a class="nav-link" href="https://github.com/pandas-dev/pandas" target="_blank" rel="noopener">
+        <span><i class="fab fa-github-alt" style="color:#333;font-size:1rem;line-height:1.25"></i></span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="https://twitter.com/pandas_dev" target="_blank" rel="noopener">
+        <span><i class="fab fa-twitter" style="color:#55acee;font-size:1rem;line-height:1.25"></i></span>
+      </a>
+    </li>
+  </ul>
+</div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row flex-xl-nowrap">
+          <div class="col-12 col-md-3 col-xl-2 bd-sidebar">
+              
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+  <div class="bd-toc-item active">
+  
+
+  <ul class="nav bd-sidenav">
+      
+      
+      
+      
+        
+          
+    
+              <li class="active">
+                  <a href="arrays.html">Array objects</a>
+                  <ul>
+                  
+                      <li class="">
+                          <a href="arrays.ndarray.html">The N-dimensional array (ndarray)</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="arrays.scalars.html">Scalars</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="arrays.dtypes.html">Data type objects (dtype)</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="arrays.indexing.html">Indexing</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="arrays.nditer.html">Iterating Over Arrays</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="arrays.classes.html">Standard array subclasses</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="maskedarray.html">Masked arrays</a>
+                      </li>
+                  
+                      <li class="active">
+                          <a href="">The Array Interface</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="arrays.datetime.html">Datetimes and Timedeltas</a>
+                      </li>
+                  
+                  </ul>
+              </li> 
+          
+        
+          
+              <li class="">
+                  <a href="constants.html">Constants</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="ufuncs.html">Universal functions (ufunc)</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="routines.html">Routines</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="distutils.html">Packaging (numpy.distutils)</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="distutils_guide.html">NumPy Distutils - Users Guide</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="c-api/index.html">NumPy C-API</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="internals.html">NumPy internals</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="swig.html">NumPy and SWIG</a>
+              </li>
+          
+        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </ul>
+
+</nav>
+
+
+              
+          </div>
+
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+              
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#python-side" class="nav-link">Python side</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#c-struct-access" class="nav-link">C-struct access</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#type-description-examples" class="nav-link">Type description examples</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#differences-with-array-interface-version-2" class="nav-link">Differences with Array interface (Version 2)</a>
+        </li>
+    
+    </ul>
+</nav>
+              
+            </div>
+
+          <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">
+              <div>
+                
+  <div class="section" id="the-array-interface">
+<span id="arrays-interface"></span><span id="index-0"></span><h1>The Array Interface<a class="headerlink" href="#the-array-interface" title="Permalink to this headline">¶</a></h1>
+<div class="alert alert-info">
+<p class="admonition-title">Note</p>
+<p>This page describes the numpy-specific API for accessing the contents of
+a numpy array from other C extensions. <span class="target" id="index-1"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-3118"><strong>PEP 3118</strong></a> –
+<a class="reference external" href="https://docs.python.org/dev/c-api/buffer.html#c.PyObject_GetBuffer" title="(in Python v3.9)"><code class="xref c c-func docutils literal notranslate"><span class="pre">The</span> <span class="pre">Revised</span> <span class="pre">Buffer</span> <span class="pre">Protocol</span></code></a> introduces
+similar, standardized API to Python 2.6 and 3.0 for any extension
+module to use. <a class="reference external" href="http://cython.org/">Cython</a>’s buffer array support
+uses the <span class="target" id="index-2"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-3118"><strong>PEP 3118</strong></a> API; see the <a class="reference external" href="https://github.com/cython/cython/wiki/tutorials-numpy">Cython numpy
+tutorial</a>. Cython provides a way to write code that supports the buffer
+protocol with Python versions older than 2.6 because it has a
+backward-compatible implementation utilizing the array interface
+described here.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">version</dt>
+<dd class="field-odd"><p>3</p>
+</dd>
+</dl>
+<p>The array interface (sometimes called array protocol) was created in
+2005 as a means for array-like Python objects to re-use each other’s
+data buffers intelligently whenever possible. The homogeneous
+N-dimensional array interface is a default mechanism for objects to
+share N-dimensional array memory and information.  The interface
+consists of a Python-side and a C-side using two attributes.  Objects
+wishing to be considered an N-dimensional array in application code
+should support at least one of these attributes.  Objects wishing to
+support an N-dimensional array in application code should look for at
+least one of these attributes and use the information provided
+appropriately.</p>
+<p>This interface describes homogeneous arrays in the sense that each
+item of the array has the same “type”.  This type can be very simple
+or it can be a quite arbitrary and complicated C-like structure.</p>
+<p>There are two ways to use the interface: A Python side and a C-side.
+Both are separate attributes.</p>
+<div class="section" id="python-side">
+<h2>Python side<a class="headerlink" href="#python-side" title="Permalink to this headline">¶</a></h2>
+<p>This approach to the interface consists of the object having an
+<a class="reference internal" href="#__array_interface__" title="__array_interface__"><code class="xref py py-data docutils literal notranslate"><span class="pre">__array_interface__</span></code></a> attribute.</p>
+<dl class="data">
+<dt id="__array_interface__">
+<code class="sig-name descname">__array_interface__</code><a class="headerlink" href="#__array_interface__" title="Permalink to this definition">¶</a></dt>
+<dd><p>A dictionary of items (3 required and 5 optional).  The optional
+keys in the dictionary have implied defaults if they are not
+provided.</p>
+<p>The keys are:</p>
+<p><strong>shape</strong> (required)</p>
+<blockquote>
+<div><p>Tuple whose elements are the array size in each dimension. Each
+entry is an integer (a Python int or long).  Note that these
+integers could be larger than the platform “int” or “long”
+could hold (a Python int is a C long). It is up to the code
+using this attribute to handle this appropriately; either by
+raising an error when overflow is possible, or by using
+<code class="xref c c-data docutils literal notranslate"><span class="pre">Py_LONG_LONG</span></code> as the C type for the shapes.</p>
+</div></blockquote>
+<p><strong>typestr</strong> (required)</p>
+<blockquote>
+<div><p>A string providing the basic type of the homogenous array The
+basic string format consists of 3 parts: a character describing
+the byteorder of the data (<code class="docutils literal notranslate"><span class="pre">&lt;</span></code>: little-endian, <code class="docutils literal notranslate"><span class="pre">&gt;</span></code>:
+big-endian, <code class="docutils literal notranslate"><span class="pre">|</span></code>: not-relevant), a character code giving the
+basic type of the array, and an integer providing the number of
+bytes the type uses.</p>
+<p>The basic type character codes are:</p>
+<table class="table">
+<colgroup>
+<col style="width: 7%" />
+<col style="width: 93%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">t</span></code></p></td>
+<td><p>Bit field (following integer gives the number of
+bits in the bit field).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">b</span></code></p></td>
+<td><p>Boolean (integer type where all values are only True or False)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">i</span></code></p></td>
+<td><p>Integer</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">u</span></code></p></td>
+<td><p>Unsigned integer</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">f</span></code></p></td>
+<td><p>Floating point</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">c</span></code></p></td>
+<td><p>Complex floating point</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">m</span></code></p></td>
+<td><p>Timedelta</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">M</span></code></p></td>
+<td><p>Datetime</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">O</span></code></p></td>
+<td><p>Object (i.e. the memory contains a pointer to <a class="reference external" href="https://docs.python.org/dev/c-api/structures.html#c.PyObject" title="(in Python v3.9)"><code class="xref c c-type docutils literal notranslate"><span class="pre">PyObject</span></code></a>)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">S</span></code></p></td>
+<td><p>String (fixed-length sequence of char)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">U</span></code></p></td>
+<td><p>Unicode (fixed-length sequence of <a class="reference external" href="https://docs.python.org/dev/c-api/unicode.html#c.Py_UNICODE" title="(in Python v3.9)"><code class="xref c c-type docutils literal notranslate"><span class="pre">Py_UNICODE</span></code></a>)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">V</span></code></p></td>
+<td><p>Other (void * – each item is a fixed-size chunk of memory)</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p><strong>descr</strong> (optional)</p>
+<blockquote>
+<div><p>A list of tuples providing a more detailed description of the
+memory layout for each item in the homogeneous array.  Each
+tuple in the list has two or three elements.  Normally, this
+attribute would be used when <em>typestr</em> is <code class="docutils literal notranslate"><span class="pre">V[0-9]+</span></code>, but this is
+not a requirement.  The only requirement is that the number of
+bytes represented in the <em>typestr</em> key is the same as the total
+number of bytes represented here.  The idea is to support
+descriptions of C-like structs that make up array
+elements.  The elements of each tuple in the list are</p>
+<ol class="arabic simple">
+<li><p>A string providing a name associated with this portion of
+the datatype.  This could also be a tuple of <code class="docutils literal notranslate"><span class="pre">('full</span> <span class="pre">name',</span>
+<span class="pre">'basic_name')</span></code> where basic name would be a valid Python
+variable name representing the full name of the field.</p></li>
+<li><p>Either a basic-type description string as in <em>typestr</em> or
+another list (for nested structured types)</p></li>
+<li><p>An optional shape tuple providing how many times this part
+of the structure should be repeated.  No repeats are assumed
+if this is not given.  Very complicated structures can be
+described using this generic interface.  Notice, however,
+that each element of the array is still of the same
+data-type.  Some examples of using this interface are given
+below.</p></li>
+</ol>
+<p><strong>Default</strong>: <code class="docutils literal notranslate"><span class="pre">[('',</span> <span class="pre">typestr)]</span></code></p>
+</div></blockquote>
+<p><strong>data</strong> (optional)</p>
+<blockquote>
+<div><p>A 2-tuple whose first argument is an integer (a long integer
+if necessary) that points to the data-area storing the array
+contents.  This pointer must point to the first element of
+data (in other words any offset is always ignored in this
+case). The second entry in the tuple is a read-only flag (true
+means the data area is read-only).</p>
+<p>This attribute can also be an object exposing the
+<a class="reference external" href="https://docs.python.org/dev/c-api/objbuffer.html#c.PyObject_AsCharBuffer" title="(in Python v3.9)"><code class="xref c c-func docutils literal notranslate"><span class="pre">buffer</span> <span class="pre">interface</span></code></a> which
+will be used to share the data. If this key is not present (or
+returns None), then memory sharing will be done
+through the buffer interface of the object itself.  In this
+case, the offset key can be used to indicate the start of the
+buffer.  A reference to the object exposing the array interface
+must be stored by the new object if the memory area is to be
+secured.</p>
+<p><strong>Default</strong>: None</p>
+</div></blockquote>
+<p><strong>strides</strong> (optional)</p>
+<blockquote>
+<div><p>Either None to indicate a C-style contiguous array or
+a Tuple of strides which provides the number of bytes needed
+to jump to the next array element in the corresponding
+dimension. Each entry must be an integer (a Python
+<code class="xref py py-const docutils literal notranslate"><span class="pre">int</span></code> or <code class="xref py py-const docutils literal notranslate"><span class="pre">long</span></code>). As with shape, the values may
+be larger than can be represented by a C “int” or “long”; the
+calling code should handle this appropriately, either by
+raising an error, or by using <code class="xref c c-type docutils literal notranslate"><span class="pre">Py_LONG_LONG</span></code> in C. The
+default is None which implies a C-style contiguous
+memory buffer.  In this model, the last dimension of the array
+varies the fastest.  For example, the default strides tuple
+for an object whose array entries are 8 bytes long and whose
+shape is (10,20,30) would be (4800, 240, 8)</p>
+<p><strong>Default</strong>: None (C-style contiguous)</p>
+</div></blockquote>
+<p><strong>mask</strong> (optional)</p>
+<blockquote>
+<div><p>None or an object exposing the array interface.  All
+elements of the mask array should be interpreted only as true
+or not true indicating which elements of this array are valid.
+The shape of this object should be <em class="xref py py-obj">“broadcastable”</em> to the shape of the
+original array.</p>
+<p><strong>Default</strong>: None (All array values are valid)</p>
+</div></blockquote>
+<p><strong>offset</strong> (optional)</p>
+<blockquote>
+<div><p>An integer offset into the array data region. This can only be
+used when data is None or returns a <code class="xref py py-class docutils literal notranslate"><span class="pre">buffer</span></code>
+object.</p>
+<p><strong>Default</strong>: 0.</p>
+</div></blockquote>
+<p><strong>version</strong> (required)</p>
+<blockquote>
+<div><p>An integer showing the version of the interface (i.e. 3 for
+this version).  Be careful not to use this to invalidate
+objects exposing future versions of the interface.</p>
+</div></blockquote>
+</dd></dl>
+
+</div>
+<div class="section" id="c-struct-access">
+<h2>C-struct access<a class="headerlink" href="#c-struct-access" title="Permalink to this headline">¶</a></h2>
+<p>This approach to the array interface allows for faster access to an
+array using only one attribute lookup and a well-defined C-structure.</p>
+<dl class="var">
+<dt id="c.__array_struct__">
+<code class="sig-name descname">__array_struct__</code><a class="headerlink" href="#c.__array_struct__" title="Permalink to this definition">¶</a></dt>
+<dd><p>A :c:type: <em class="xref py py-obj">PyCObject</em> whose <code class="xref c c-data docutils literal notranslate"><span class="pre">voidptr</span></code> member contains a
+pointer to a filled <a class="reference internal" href="c-api/types-and-structures.html#c.PyArrayInterface" title="PyArrayInterface"><code class="xref c c-type docutils literal notranslate"><span class="pre">PyArrayInterface</span></code></a> structure.  Memory
+for the structure is dynamically created and the <code class="xref c c-type docutils literal notranslate"><span class="pre">PyCObject</span></code>
+is also created with an appropriate destructor so the retriever of
+this attribute simply has to apply <a class="reference external" href="https://docs.python.org/dev/c-api/refcounting.html#c.Py_DECREF" title="(in Python v3.9)"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_DECREF</span></code></a> to the
+object returned by this attribute when it is finished.  Also,
+either the data needs to be copied out, or a reference to the
+object exposing this attribute must be held to ensure the data is
+not freed.  Objects exposing the <code class="xref py py-obj docutils literal notranslate"><span class="pre">__array_struct__</span></code> interface
+must also not reallocate their memory if other objects are
+referencing them.</p>
+</dd></dl>
+
+<p>The PyArrayInterface structure is defined in <code class="docutils literal notranslate"><span class="pre">numpy/ndarrayobject.h</span></code>
+as:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">typedef</span> <span class="n">struct</span> <span class="p">{</span>
+  <span class="nb">int</span> <span class="n">two</span><span class="p">;</span>              <span class="o">/*</span> <span class="n">contains</span> <span class="n">the</span> <span class="n">integer</span> <span class="mi">2</span> <span class="o">--</span> <span class="n">simple</span> <span class="n">sanity</span> <span class="n">check</span> <span class="o">*/</span>
+  <span class="nb">int</span> <span class="n">nd</span><span class="p">;</span>               <span class="o">/*</span> <span class="n">number</span> <span class="n">of</span> <span class="n">dimensions</span> <span class="o">*/</span>
+  <span class="n">char</span> <span class="n">typekind</span><span class="p">;</span>        <span class="o">/*</span> <span class="n">kind</span> <span class="ow">in</span> <span class="n">array</span> <span class="o">---</span> <span class="n">character</span> <span class="n">code</span> <span class="n">of</span> <span class="n">typestr</span> <span class="o">*/</span>
+  <span class="nb">int</span> <span class="n">itemsize</span><span class="p">;</span>         <span class="o">/*</span> <span class="n">size</span> <span class="n">of</span> <span class="n">each</span> <span class="n">element</span> <span class="o">*/</span>
+  <span class="nb">int</span> <span class="n">flags</span><span class="p">;</span>            <span class="o">/*</span> <span class="n">flags</span> <span class="n">indicating</span> <span class="n">how</span> <span class="n">the</span> <span class="n">data</span> <span class="n">should</span> <span class="n">be</span> <span class="n">interpreted</span> <span class="o">*/</span>
+                        <span class="o">/*</span>   <span class="n">must</span> <span class="nb">set</span> <span class="n">ARR_HAS_DESCR</span> <span class="n">bit</span> <span class="n">to</span> <span class="n">validate</span> <span class="n">descr</span> <span class="o">*/</span>
+  <span class="n">Py_intptr_t</span> <span class="o">*</span><span class="n">shape</span><span class="p">;</span>   <span class="o">/*</span> <span class="n">A</span> <span class="n">length</span><span class="o">-</span><span class="n">nd</span> <span class="n">array</span> <span class="n">of</span> <span class="n">shape</span> <span class="n">information</span> <span class="o">*/</span>
+  <span class="n">Py_intptr_t</span> <span class="o">*</span><span class="n">strides</span><span class="p">;</span> <span class="o">/*</span> <span class="n">A</span> <span class="n">length</span><span class="o">-</span><span class="n">nd</span> <span class="n">array</span> <span class="n">of</span> <span class="n">stride</span> <span class="n">information</span> <span class="o">*/</span>
+  <span class="n">void</span> <span class="o">*</span><span class="n">data</span><span class="p">;</span>           <span class="o">/*</span> <span class="n">A</span> <span class="n">pointer</span> <span class="n">to</span> <span class="n">the</span> <span class="n">first</span> <span class="n">element</span> <span class="n">of</span> <span class="n">the</span> <span class="n">array</span> <span class="o">*/</span>
+  <span class="n">PyObject</span> <span class="o">*</span><span class="n">descr</span><span class="p">;</span>      <span class="o">/*</span> <span class="n">NULL</span> <span class="ow">or</span> <span class="n">data</span><span class="o">-</span><span class="n">description</span> <span class="p">(</span><span class="n">same</span> <span class="k">as</span> <span class="n">descr</span> <span class="n">key</span>
+                                <span class="n">of</span> <span class="n">__array_interface__</span><span class="p">)</span> <span class="o">--</span> <span class="n">must</span> <span class="nb">set</span> <span class="n">ARR_HAS_DESCR</span>
+                                <span class="n">flag</span> <span class="ow">or</span> <span class="n">this</span> <span class="n">will</span> <span class="n">be</span> <span class="n">ignored</span><span class="o">.</span> <span class="o">*/</span>
+<span class="p">}</span> <span class="n">PyArrayInterface</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The flags member may consist of 5 bits showing how the data should be
+interpreted and one bit showing how the Interface should be
+interpreted.  The data-bits are <code class="xref py py-const docutils literal notranslate"><span class="pre">CONTIGUOUS</span></code> (0x1),
+<code class="xref py py-const docutils literal notranslate"><span class="pre">FORTRAN</span></code> (0x2), <code class="xref py py-const docutils literal notranslate"><span class="pre">ALIGNED</span></code> (0x100), <code class="xref py py-const docutils literal notranslate"><span class="pre">NOTSWAPPED</span></code>
+(0x200), and <code class="xref py py-const docutils literal notranslate"><span class="pre">WRITEABLE</span></code> (0x400).  A final flag
+<code class="xref py py-const docutils literal notranslate"><span class="pre">ARR_HAS_DESCR</span></code> (0x800) indicates whether or not this structure
+has the arrdescr field.  The field should not be accessed unless this
+flag is present.</p>
+<div class="admonition-new-since-june-16-2006 alert">
+<p class="admonition-title">New since June 16, 2006:</p>
+<p>In the past most implementations used the “desc” member of the
+<code class="xref c c-type docutils literal notranslate"><span class="pre">PyCObject</span></code> itself (do not confuse this with the “descr” member of
+the <a class="reference internal" href="c-api/types-and-structures.html#c.PyArrayInterface" title="PyArrayInterface"><code class="xref c c-type docutils literal notranslate"><span class="pre">PyArrayInterface</span></code></a> structure above — they are two separate
+things) to hold the pointer to the object exposing the interface.
+This is now an explicit part of the interface.  Be sure to own a
+reference to the object when the <code class="xref c c-type docutils literal notranslate"><span class="pre">PyCObject</span></code> is created using
+<code class="xref c c-type docutils literal notranslate"><span class="pre">PyCObject_FromVoidPtrAndDesc</span></code>.</p>
+</div>
+</div>
+<div class="section" id="type-description-examples">
+<h2>Type description examples<a class="headerlink" href="#type-description-examples" title="Permalink to this headline">¶</a></h2>
+<p>For clarity it is useful to provide some examples of the type
+description and corresponding <a class="reference internal" href="#__array_interface__" title="__array_interface__"><code class="xref py py-data docutils literal notranslate"><span class="pre">__array_interface__</span></code></a> ‘descr’
+entries.  Thanks to Scott Gilbert for these examples:</p>
+<p>In every case, the ‘descr’ key is optional, but of course provides
+more information which may be important for various applications:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span> <span class="n">Float</span> <span class="n">data</span>
+    <span class="n">typestr</span> <span class="o">==</span> <span class="s1">&#39;&gt;f4&#39;</span>
+    <span class="n">descr</span> <span class="o">==</span> <span class="p">[(</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="s1">&#39;&gt;f4&#39;</span><span class="p">)]</span>
+
+<span class="o">*</span> <span class="n">Complex</span> <span class="n">double</span>
+    <span class="n">typestr</span> <span class="o">==</span> <span class="s1">&#39;&gt;c8&#39;</span>
+    <span class="n">descr</span> <span class="o">==</span> <span class="p">[(</span><span class="s1">&#39;real&#39;</span><span class="p">,</span><span class="s1">&#39;&gt;f4&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;imag&#39;</span><span class="p">,</span><span class="s1">&#39;&gt;f4&#39;</span><span class="p">)]</span>
+
+<span class="o">*</span> <span class="n">RGB</span> <span class="n">Pixel</span> <span class="n">data</span>
+    <span class="n">typestr</span> <span class="o">==</span> <span class="s1">&#39;|V3&#39;</span>
+    <span class="n">descr</span> <span class="o">==</span> <span class="p">[(</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="s1">&#39;|u1&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;g&#39;</span><span class="p">,</span><span class="s1">&#39;|u1&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="s1">&#39;|u1&#39;</span><span class="p">)]</span>
+
+<span class="o">*</span> <span class="n">Mixed</span> <span class="n">endian</span> <span class="p">(</span><span class="n">weird</span> <span class="n">but</span> <span class="n">could</span> <span class="n">happen</span><span class="p">)</span><span class="o">.</span>
+    <span class="n">typestr</span> <span class="o">==</span> <span class="s1">&#39;|V8&#39;</span> <span class="p">(</span><span class="ow">or</span> <span class="s1">&#39;&gt;u8&#39;</span><span class="p">)</span>
+    <span class="n">descr</span> <span class="o">==</span> <span class="p">[(</span><span class="s1">&#39;big&#39;</span><span class="p">,</span><span class="s1">&#39;&gt;i4&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;little&#39;</span><span class="p">,</span><span class="s1">&#39;&lt;i4&#39;</span><span class="p">)]</span>
+
+<span class="o">*</span> <span class="n">Nested</span> <span class="n">structure</span>
+    <span class="n">struct</span> <span class="p">{</span>
+        <span class="nb">int</span> <span class="n">ival</span><span class="p">;</span>
+        <span class="n">struct</span> <span class="p">{</span>
+            <span class="n">unsigned</span> <span class="n">short</span> <span class="n">sval</span><span class="p">;</span>
+            <span class="n">unsigned</span> <span class="n">char</span> <span class="n">bval</span><span class="p">;</span>
+            <span class="n">unsigned</span> <span class="n">char</span> <span class="n">cval</span><span class="p">;</span>
+        <span class="p">}</span> <span class="n">sub</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">typestr</span> <span class="o">==</span> <span class="s1">&#39;|V8&#39;</span> <span class="p">(</span><span class="ow">or</span> <span class="s1">&#39;&lt;u8&#39;</span> <span class="k">if</span> <span class="n">you</span> <span class="n">want</span><span class="p">)</span>
+    <span class="n">descr</span> <span class="o">==</span> <span class="p">[(</span><span class="s1">&#39;ival&#39;</span><span class="p">,</span><span class="s1">&#39;&lt;i4&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;sub&#39;</span><span class="p">,</span> <span class="p">[(</span><span class="s1">&#39;sval&#39;</span><span class="p">,</span><span class="s1">&#39;&lt;u2&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;bval&#39;</span><span class="p">,</span><span class="s1">&#39;|u1&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;cval&#39;</span><span class="p">,</span><span class="s1">&#39;|u1&#39;</span><span class="p">)</span> <span class="p">])</span> <span class="p">]</span>
+
+<span class="o">*</span> <span class="n">Nested</span> <span class="n">array</span>
+    <span class="n">struct</span> <span class="p">{</span>
+        <span class="nb">int</span> <span class="n">ival</span><span class="p">;</span>
+        <span class="n">double</span> <span class="n">data</span><span class="p">[</span><span class="mi">16</span><span class="o">*</span><span class="mi">4</span><span class="p">];</span>
+    <span class="p">}</span>
+    <span class="n">typestr</span> <span class="o">==</span> <span class="s1">&#39;|V516&#39;</span>
+    <span class="n">descr</span> <span class="o">==</span> <span class="p">[(</span><span class="s1">&#39;ival&#39;</span><span class="p">,</span><span class="s1">&#39;&gt;i4&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">,</span><span class="s1">&#39;&gt;f8&#39;</span><span class="p">,(</span><span class="mi">16</span><span class="p">,</span><span class="mi">4</span><span class="p">))]</span>
+
+<span class="o">*</span> <span class="n">Padded</span> <span class="n">structure</span>
+    <span class="n">struct</span> <span class="p">{</span>
+        <span class="nb">int</span> <span class="n">ival</span><span class="p">;</span>
+        <span class="n">double</span> <span class="n">dval</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">typestr</span> <span class="o">==</span> <span class="s1">&#39;|V16&#39;</span>
+    <span class="n">descr</span> <span class="o">==</span> <span class="p">[(</span><span class="s1">&#39;ival&#39;</span><span class="p">,</span><span class="s1">&#39;&gt;i4&#39;</span><span class="p">),(</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="s1">&#39;|V4&#39;</span><span class="p">),(</span><span class="s1">&#39;dval&#39;</span><span class="p">,</span><span class="s1">&#39;&gt;f8&#39;</span><span class="p">)]</span>
+</pre></div>
+</div>
+<p>It should be clear that any structured type could be described using this
+interface.</p>
+</div>
+<div class="section" id="differences-with-array-interface-version-2">
+<h2>Differences with Array interface (Version 2)<a class="headerlink" href="#differences-with-array-interface-version-2" title="Permalink to this headline">¶</a></h2>
+<p>The version 2 interface was very similar.  The differences were
+largely aesthetic.  In particular:</p>
+<ol class="arabic simple">
+<li><p>The PyArrayInterface structure had no descr member at the end
+(and therefore no flag ARR_HAS_DESCR)</p></li>
+<li><p>The desc member of the PyCObject returned from __array_struct__ was
+not specified.  Usually, it was the object exposing the array (so
+that a reference to it could be kept and destroyed when the
+C-object was destroyed).  Now it must be a tuple whose first
+element is a string with “PyArrayInterface Version #” and whose
+second element is the object exposing the array.</p></li>
+<li><p>The tuple returned from __array_interface__[‘data’] used to be a
+hex-string (now it is an integer or a long integer).</p></li>
+<li><p>There was no __array_interface__ attribute instead all of the keys
+(except for version) in the __array_interface__ dictionary were
+their own attribute: Thus to obtain the Python-side information you
+had to access separately the attributes:</p>
+<ul class="simple">
+<li><p>__array_data__</p></li>
+<li><p>__array_shape__</p></li>
+<li><p>__array_strides__</p></li>
+<li><p>__array_typestr__</p></li>
+<li><p>__array_descr__</p></li>
+<li><p>__array_offset__</p></li>
+<li><p>__array_mask__</p></li>
+</ul>
+</li>
+</ol>
+</div>
+</div>
+
+
+              </div>
+              <div class='prev-next-bottom'>
+                
+    <a class='left-prev' id="prev-link" href="generated/numpy.ma.where.html" title="previous page">numpy.ma.where</a>
+    <a class='right-next' id="next-link" href="arrays.datetime.html" title="next page">Datetimes and Timedeltas</a>
+
+              </div>
+          </main>
+
+      </div>
+    </div><script>
+    // TOC sidebar - add "active" class to parent list
+    //
+    // Bootstrap's scrollspy adds the active class to the <a> link,
+    // but for the automatic collapsing we need this on the parent list item.
+    //
+    // The event is triggered on "window" (and not the nav item as documented),
+    // see https://github.com/twbs/bootstrap/issues/20086
+    $(window).on("activate.bs.scrollspy", function(){
+    var navLinks = document.querySelectorAll('#bd-toc-nav a');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.remove('active');
+    }
+    var navLinks = document.querySelectorAll('#bd-toc-nav a.active');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.add('active');
+    }
+    });
+
+    /**
+     * Use left and right arrow keys to navigate forward and backwards.
+    */
+    const LEFT_ARROW_KEYCODE = 37
+    const RIGHT_ARROW_KEYCODE = 39
+
+    const getPrevUrl = () => document.getElementById('prev-link').href
+    const getNextUrl = () => document.getElementById('next-link').href
+    const initPageNav = (event) => {
+        const keycode = event.which
+
+        if (keycode === LEFT_ARROW_KEYCODE) {
+            window.location.href = getPrevUrl();
+        } else if (keycode === RIGHT_ARROW_KEYCODE) {
+            window.location.href = getNextUrl();
+        }
+    };
+
+    var keyboardListener = false;
+    $( document ).ready(() => {
+        if (keyboardListener === false) {
+            document.addEventListener('keydown', initPageNav)
+            keyboardListener = true;
+        }
+    });
+</script>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2008-2019, The SciPy community.
+      Last updated on Nov 29, 2019.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.1.
+    </div>
+<div class="footer-area footer--light">
+  <div class="footer-big">
+    <!-- start .container -->
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-12">
+          <div class="footer-widget">
+            <div class="widget-about">
+              <img src="../_static/images/numpy_logo.svg" alt="NumPy logo" class="img-fluid">
+              <p>NumPy is the fundamental package needed for scientific computing with Python.</p>
+              <ul class="contact-details">
+                <li>
+                  <span class="icon-envelope-open"></span>
+                  <a href="https://mail.python.org/mailman/listinfo/numpy-discussion">
+                    Mailing list
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- Ends: .footer-widget -->
+        </div>
+        <!-- end /.col-md-4 -->
+        <div class="col-md-3 col-sm-4">
+          <div class="footer-widget">
+            <div class="footer-menu footer-menu--1">
+              <h4 class="footer-widget-title">About us</h4>
+              <ul>
+                <li>
+                  <a href="#">Our history</a>
+                </li>
+                <li>
+                  <a href="#">Ecosystem</a>
+                </li>
+                <li>
+                  <a href="#">Roadmap</a>
+                </li>
+                <li>
+                  <a href="#">Team</a>
+                </li>
+              </ul>
+            </div>
+            <!-- end /.footer-menu -->
+          </div>
+          <!-- Ends: .footer-widget -->
+        </div>
+        <!-- end /.col-md-3 -->
+
+        <div class="col-md-3 col-sm-4">
+          <div class="footer-widget">
+            <div class="footer-menu">
+              <h4 class="footer-widget-title">Community</h4>
+              <ul>
+                <li>
+                  <a href="#">Blog</a>
+                </li>
+                <li>
+                  <a href="#">Contributing</a>
+                </li>
+                <li>
+                  <a href="#">Code of conduct</a>
+                </li>
+                <li>
+                  <a href="#">Community survey</a>
+                </li>
+              </ul>
+            </div>
+            <!-- end /.footer-menu -->
+          </div>
+          <!-- Ends: .footer-widget -->
+        </div>
+        <!-- end /.col-lg-3 -->
+
+        <div class="col-md-3 col-sm-4">
+          <div class="footer-widget">
+            <div class="footer-menu no-padding">
+              <h4 class="footer-widget-title">Learning &  Documentation</h4>
+              <ul>
+                <li>
+                  <a href="#">User guide</a>
+                </li>
+                <li>
+                  <a href="#">API reference</a>
+                </li>
+                <li>
+                  <a href="#">Release notes</a>
+                </li>
+                <li>
+                  <a href="#">Tutorials</a>
+                </li>
+                <li>
+                  <a href="#">Videos</a>
+                </li>
+                <li>
+                  <a href="#">Books</a>
+                </li>
+                <li>
+                  <a href="#">Courses</a>
+                </li>
+              </ul>
+            </div>
+            <!-- end /.footer-menu -->
+          </div>
+          <!-- Ends: .footer-widget -->
+        </div>
+        <!-- Ends: .col-lg-3 -->
+
+      </div>
+      <!-- end /.row -->
+    </div>
+    <!-- end /.container -->
+  </div>
+  <!-- end /.footer-big -->
+
+  <div class="mini-footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="copyright-text">
+            <p>&copy; <span id="year"></span>
+              <a href="#">NumPy Developers</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </body>
+</html>

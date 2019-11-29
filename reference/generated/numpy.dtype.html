@@ -1,0 +1,677 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>numpy.dtype &#8212; NumPy v1.18.dev0 Manual</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../_static/sphinx-bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/extra-footer.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/custom_theme.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/code-highlight.css" />
+    <link href="../../_static/css/custom.css" rel="stylesheet">
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="numpy.dtype.newbyteorder" href="numpy.dtype.newbyteorder.html" />
+    <link rel="prev" title="Data type objects (dtype)" href="../arrays.dtypes.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+
+<a class="navbar-brand" href="../../index.html">
+  <img src="../../_static/numpy_logo.png" class="logo" alt="logo">
+</a>
+
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+</button>
+
+<div id="navbar-menu" class="collapse navbar-collapse">
+  <ul id="navbar-main-elements" class="navbar-nav mr-auto">
+    <li class="nav-item">
+        <a class="nav-link" href="../../index.html">Home</a>
+    </li>
+    
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../user/index.html">User Guide</a>
+    </li>
+    
+    <li class="nav-item active">
+        <a class="nav-link" href="../index.html">NumPy Reference</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../dev/index.html">Contributing to NumPy</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../release.html">Release Notes</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../about.html">About NumPy</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href=""></a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../bugs.html">Reporting bugs</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../glossary.html">Glossary</a>
+    </li>
+    
+  </ul>
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+      <a class="nav-link" href="https://github.com/pandas-dev/pandas" target="_blank" rel="noopener">
+        <span><i class="fab fa-github-alt" style="color:#333;font-size:1rem;line-height:1.25"></i></span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="https://twitter.com/pandas_dev" target="_blank" rel="noopener">
+        <span><i class="fab fa-twitter" style="color:#55acee;font-size:1rem;line-height:1.25"></i></span>
+      </a>
+    </li>
+  </ul>
+</div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row flex-xl-nowrap">
+          <div class="col-12 col-md-3 col-xl-2 bd-sidebar">
+              
+
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+  <div class="bd-toc-item active">
+  
+
+  <ul class="nav bd-sidenav">
+      
+      
+      
+      
+        
+          
+              <li class="">
+                  <a href="../arrays.html">Array objects</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../constants.html">Constants</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../ufuncs.html">Universal functions (ufunc)</a>
+              </li>
+          
+        
+          
+    
+              <li class="active">
+                  <a href="../routines.html">Routines</a>
+                  <ul>
+                  
+                      <li class="">
+                          <a href="../routines.array-creation.html">Array creation routines</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.array-manipulation.html">Array manipulation routines</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.bitwise.html">Binary operations</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.char.html">String operations</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.ctypeslib.html">C-Types Foreign Function Interface (numpy.ctypeslib)</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.datetime.html">Datetime Support Functions</a>
+                      </li>
+                  
+                      <li class="active">
+                          <a href="../routines.dtype.html">Data type routines</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.dual.html">Optionally Scipy-accelerated routines (numpy.dual)</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.emath.html">Mathematical functions with automatic domain (numpy.emath)</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.err.html">Floating point error handling</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.fft.html">Discrete Fourier Transform (numpy.fft)</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.financial.html">Financial functions</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.functional.html">Functional programming</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.help.html">NumPy-specific help functions</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.indexing.html">Indexing routines</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.io.html">Input and output</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.linalg.html">Linear algebra (numpy.linalg)</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.logic.html">Logic functions</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.ma.html">Masked array operations</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.math.html">Mathematical functions</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.matlib.html">Matrix library (numpy.matlib)</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.other.html">Miscellaneous routines</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.padding.html">Padding Arrays</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.polynomials.html">Polynomials</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../random/index.html">Random sampling (numpy.random)</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.set.html">Set routines</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.sort.html">Sorting, searching, and counting</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.statistics.html">Statistics</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.testing.html">Test Support (numpy.testing)</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.window.html">Window functions</a>
+                      </li>
+                  
+                  </ul>
+              </li> 
+          
+        
+          
+              <li class="">
+                  <a href="../distutils.html">Packaging (numpy.distutils)</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../distutils_guide.html">NumPy Distutils - Users Guide</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../c-api/index.html">NumPy C-API</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../internals.html">NumPy internals</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../swig.html">NumPy and SWIG</a>
+              </li>
+          
+        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </ul>
+
+</nav>
+
+
+              
+          </div>
+
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+              
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+    </ul>
+</nav>
+              
+            </div>
+
+          <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">
+              <div>
+                
+  <div class="section" id="numpy-dtype">
+<h1>numpy.dtype<a class="headerlink" href="#numpy-dtype" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="numpy.dtype">
+<em class="property">class </em><code class="sig-prename descclassname">numpy.</code><code class="sig-name descname">dtype</code><span class="sig-paren">(</span><em class="sig-param">obj</em>, <em class="sig-param">align=False</em>, <em class="sig-param">copy=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/numpy/numpy/blob/master/numpy/__init__.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#numpy.dtype" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a data type object.</p>
+<p>A numpy array is homogeneous, and contains elements described by a
+dtype object. A dtype object can be constructed from different
+combinations of fundamental numeric types.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>obj</strong></dt><dd><p>Object to be converted to a data type object.</p>
+</dd>
+<dt><strong>align</strong><span class="classifier">bool, optional</span></dt><dd><p>Add padding to the fields to match what a C compiler would output
+for a similar C-struct. Can be <code class="docutils literal notranslate"><span class="pre">True</span></code> only if <em class="xref py py-obj">obj</em> is a dictionary
+or a comma-separated string. If a struct dtype is being created,
+this also sets a sticky alignment flag <code class="docutils literal notranslate"><span class="pre">isalignedstruct</span></code>.</p>
+</dd>
+<dt><strong>copy</strong><span class="classifier">bool, optional</span></dt><dd><p>Make a new copy of the data-type object. If <code class="docutils literal notranslate"><span class="pre">False</span></code>, the result
+may just be a reference to a built-in data-type object.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="alert alert-info">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="numpy.result_type.html#numpy.result_type" title="numpy.result_type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">result_type</span></code></a></p>
+</div>
+<p class="rubric">Examples</p>
+<p>Using array-scalar type:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int16</span><span class="p">)</span>
+<span class="go">dtype(&#39;int16&#39;)</span>
+</pre></div>
+</div>
+<p>Structured type, one field name ‘f1’, containing int16:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">([(</span><span class="s1">&#39;f1&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">int16</span><span class="p">)])</span>
+<span class="go">dtype([(&#39;f1&#39;, &#39;&lt;i2&#39;)])</span>
+</pre></div>
+</div>
+<p>Structured type, one field named ‘f1’, in itself containing a structured
+type with one field:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">([(</span><span class="s1">&#39;f1&#39;</span><span class="p">,</span> <span class="p">[(</span><span class="s1">&#39;f1&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">int16</span><span class="p">)])])</span>
+<span class="go">dtype([(&#39;f1&#39;, [(&#39;f1&#39;, &#39;&lt;i2&#39;)])])</span>
+</pre></div>
+</div>
+<p>Structured type, two fields: the first field contains an unsigned int, the
+second an int32:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">([(</span><span class="s1">&#39;f1&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">uint64</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;f2&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)])</span>
+<span class="go">dtype([(&#39;f1&#39;, &#39;&lt;u8&#39;), (&#39;f2&#39;, &#39;&lt;i4&#39;)])</span>
+</pre></div>
+</div>
+<p>Using array-protocol type strings:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">([(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;f8&#39;</span><span class="p">),(</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="s1">&#39;S10&#39;</span><span class="p">)])</span>
+<span class="go">dtype([(&#39;a&#39;, &#39;&lt;f8&#39;), (&#39;b&#39;, &#39;S10&#39;)])</span>
+</pre></div>
+</div>
+<p>Using comma-separated field formats.  The shape is (2,3):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s2">&quot;i4, (2,3)f8&quot;</span><span class="p">)</span>
+<span class="go">dtype([(&#39;f0&#39;, &#39;&lt;i4&#39;), (&#39;f1&#39;, &#39;&lt;f8&#39;, (2, 3))])</span>
+</pre></div>
+</div>
+<p>Using tuples.  <code class="docutils literal notranslate"><span class="pre">int</span></code> is a fixed type, 3 the field’s shape.  <code class="docutils literal notranslate"><span class="pre">void</span></code>
+is a flexible type, here of size 10:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">([(</span><span class="s1">&#39;hello&#39;</span><span class="p">,(</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">,</span><span class="mi">3</span><span class="p">)),(</span><span class="s1">&#39;world&#39;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">void</span><span class="p">,</span><span class="mi">10</span><span class="p">)])</span>
+<span class="go">dtype([(&#39;hello&#39;, &#39;&lt;i8&#39;, (3,)), (&#39;world&#39;, &#39;V10&#39;)])</span>
+</pre></div>
+</div>
+<p>Subdivide <code class="docutils literal notranslate"><span class="pre">int16</span></code> into 2 <code class="docutils literal notranslate"><span class="pre">int8</span></code>’s, called x and y.  0 and 1 are
+the offsets in bytes:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">int16</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:(</span><span class="n">np</span><span class="o">.</span><span class="n">int8</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="s1">&#39;y&#39;</span><span class="p">:(</span><span class="n">np</span><span class="o">.</span><span class="n">int8</span><span class="p">,</span><span class="mi">1</span><span class="p">)}))</span>
+<span class="go">dtype((numpy.int16, [(&#39;x&#39;, &#39;i1&#39;), (&#39;y&#39;, &#39;i1&#39;)]))</span>
+</pre></div>
+</div>
+<p>Using dictionaries.  Two fields named ‘gender’ and ‘age’:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">({</span><span class="s1">&#39;names&#39;</span><span class="p">:[</span><span class="s1">&#39;gender&#39;</span><span class="p">,</span><span class="s1">&#39;age&#39;</span><span class="p">],</span> <span class="s1">&#39;formats&#39;</span><span class="p">:[</span><span class="s1">&#39;S1&#39;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">]})</span>
+<span class="go">dtype([(&#39;gender&#39;, &#39;S1&#39;), (&#39;age&#39;, &#39;u1&#39;)])</span>
+</pre></div>
+</div>
+<p>Offsets in bytes, here 0 and 25:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">({</span><span class="s1">&#39;surname&#39;</span><span class="p">:(</span><span class="s1">&#39;S25&#39;</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span><span class="s1">&#39;age&#39;</span><span class="p">:(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">,</span><span class="mi">25</span><span class="p">)})</span>
+<span class="go">dtype([(&#39;surname&#39;, &#39;S25&#39;), (&#39;age&#39;, &#39;u1&#39;)])</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><a class="reference internal" href="numpy.dtype.alignment.html#numpy.dtype.alignment" title="numpy.dtype.alignment"><code class="xref py py-obj docutils literal notranslate"><span class="pre">alignment</span></code></a></dt><dd><p>The required alignment (bytes) of this data-type according to the compiler.</p>
+</dd>
+<dt><a class="reference internal" href="numpy.dtype.base.html#numpy.dtype.base" title="numpy.dtype.base"><code class="xref py py-obj docutils literal notranslate"><span class="pre">base</span></code></a></dt><dd><p>Returns dtype for the base element of the subarrays, regardless of their dimension or shape.</p>
+</dd>
+<dt><a class="reference internal" href="numpy.dtype.byteorder.html#numpy.dtype.byteorder" title="numpy.dtype.byteorder"><code class="xref py py-obj docutils literal notranslate"><span class="pre">byteorder</span></code></a></dt><dd><p>A character indicating the byte-order of this data-type object.</p>
+</dd>
+<dt><a class="reference internal" href="../routines.char.html#module-numpy.char" title="numpy.char"><code class="xref py py-obj docutils literal notranslate"><span class="pre">char</span></code></a></dt><dd><p>A unique character code for each of the 21 different built-in types.</p>
+</dd>
+<dt><a class="reference internal" href="numpy.dtype.descr.html#numpy.dtype.descr" title="numpy.dtype.descr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">descr</span></code></a></dt><dd><p><em class="xref py py-obj">__array_interface__</em> description of the data-type.</p>
+</dd>
+<dt><a class="reference internal" href="numpy.dtype.fields.html#numpy.dtype.fields" title="numpy.dtype.fields"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fields</span></code></a></dt><dd><p>Dictionary of named fields defined for this data type, or <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+</dd>
+<dt><a class="reference internal" href="numpy.dtype.flags.html#numpy.dtype.flags" title="numpy.dtype.flags"><code class="xref py py-obj docutils literal notranslate"><span class="pre">flags</span></code></a></dt><dd><p>Bit-flags describing how this data type is to be interpreted.</p>
+</dd>
+<dt><a class="reference internal" href="numpy.dtype.hasobject.html#numpy.dtype.hasobject" title="numpy.dtype.hasobject"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hasobject</span></code></a></dt><dd><p>Boolean indicating whether this dtype contains any reference-counted objects in any fields or sub-dtypes.</p>
+</dd>
+<dt><a class="reference internal" href="numpy.dtype.isalignedstruct.html#numpy.dtype.isalignedstruct" title="numpy.dtype.isalignedstruct"><code class="xref py py-obj docutils literal notranslate"><span class="pre">isalignedstruct</span></code></a></dt><dd><p>Boolean indicating whether the dtype is a struct which maintains field alignment.</p>
+</dd>
+<dt><a class="reference internal" href="numpy.dtype.isbuiltin.html#numpy.dtype.isbuiltin" title="numpy.dtype.isbuiltin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">isbuiltin</span></code></a></dt><dd><p>Integer indicating how this dtype relates to the built-in dtypes.</p>
+</dd>
+<dt><a class="reference internal" href="numpy.dtype.isnative.html#numpy.dtype.isnative" title="numpy.dtype.isnative"><code class="xref py py-obj docutils literal notranslate"><span class="pre">isnative</span></code></a></dt><dd><p>Boolean indicating whether the byte order of this dtype is native to the platform.</p>
+</dd>
+<dt><a class="reference internal" href="numpy.dtype.itemsize.html#numpy.dtype.itemsize" title="numpy.dtype.itemsize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">itemsize</span></code></a></dt><dd><p>The element size of this data-type object.</p>
+</dd>
+<dt><a class="reference internal" href="numpy.dtype.kind.html#numpy.dtype.kind" title="numpy.dtype.kind"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kind</span></code></a></dt><dd><p>A character code (one of ‘biufcmMOSUV’) identifying the general kind of data.</p>
+</dd>
+<dt><strong>metadata</strong></dt><dd></dd>
+<dt><a class="reference internal" href="numpy.dtype.name.html#numpy.dtype.name" title="numpy.dtype.name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">name</span></code></a></dt><dd><p>A bit-width name for this data-type.</p>
+</dd>
+<dt><a class="reference internal" href="numpy.dtype.names.html#numpy.dtype.names" title="numpy.dtype.names"><code class="xref py py-obj docutils literal notranslate"><span class="pre">names</span></code></a></dt><dd><p>Ordered list of field names, or <code class="docutils literal notranslate"><span class="pre">None</span></code> if there are no fields.</p>
+</dd>
+<dt><a class="reference internal" href="numpy.dtype.ndim.html#numpy.dtype.ndim" title="numpy.dtype.ndim"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ndim</span></code></a></dt><dd><p>Number of dimensions of the sub-array if this data type describes a sub-array, and <code class="docutils literal notranslate"><span class="pre">0</span></code> otherwise.</p>
+</dd>
+<dt><a class="reference internal" href="numpy.dtype.num.html#numpy.dtype.num" title="numpy.dtype.num"><code class="xref py py-obj docutils literal notranslate"><span class="pre">num</span></code></a></dt><dd><p>A unique number for each of the 21 different built-in types.</p>
+</dd>
+<dt><a class="reference internal" href="numpy.shape.html#numpy.shape" title="numpy.shape"><code class="xref py py-obj docutils literal notranslate"><span class="pre">shape</span></code></a></dt><dd><p>Shape tuple of the sub-array if this data type describes a sub-array, and <code class="docutils literal notranslate"><span class="pre">()</span></code> otherwise.</p>
+</dd>
+<dt><a class="reference internal" href="numpy.dtype.str.html#numpy.dtype.str" title="numpy.dtype.str"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></dt><dd><p>The array-protocol typestring of this data-type object.</p>
+</dd>
+<dt><a class="reference internal" href="numpy.dtype.subdtype.html#numpy.dtype.subdtype" title="numpy.dtype.subdtype"><code class="xref py py-obj docutils literal notranslate"><span class="pre">subdtype</span></code></a></dt><dd><p>Tuple <code class="docutils literal notranslate"><span class="pre">(item_dtype,</span> <span class="pre">shape)</span></code> if this <a class="reference internal" href="#numpy.dtype" title="numpy.dtype"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dtype</span></code></a> describes a sub-array, and None otherwise.</p>
+</dd>
+<dt><a class="reference internal" href="numpy.dtype.type.html#numpy.dtype.type" title="numpy.dtype.type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">type</span></code></a></dt><dd><p>The type object used to instantiate a scalar of this data-type.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="longtable table">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="numpy.dtype.newbyteorder.html#numpy.dtype.newbyteorder" title="numpy.dtype.newbyteorder"><code class="xref py py-obj docutils literal notranslate"><span class="pre">newbyteorder</span></code></a>([new_order])</p></td>
+<td><p>Return a new dtype with a different byte order.</p></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+              </div>
+              <div class='prev-next-bottom'>
+                
+    <a class='left-prev' id="prev-link" href="../arrays.dtypes.html" title="previous page">Data type objects (<code class="xref py py-class docutils literal notranslate"><span class="pre">dtype</span></code>)</a>
+    <a class='right-next' id="next-link" href="numpy.dtype.newbyteorder.html" title="next page">numpy.dtype.newbyteorder</a>
+
+              </div>
+          </main>
+
+      </div>
+    </div><script>
+    // TOC sidebar - add "active" class to parent list
+    //
+    // Bootstrap's scrollspy adds the active class to the <a> link,
+    // but for the automatic collapsing we need this on the parent list item.
+    //
+    // The event is triggered on "window" (and not the nav item as documented),
+    // see https://github.com/twbs/bootstrap/issues/20086
+    $(window).on("activate.bs.scrollspy", function(){
+    var navLinks = document.querySelectorAll('#bd-toc-nav a');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.remove('active');
+    }
+    var navLinks = document.querySelectorAll('#bd-toc-nav a.active');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.add('active');
+    }
+    });
+
+    /**
+     * Use left and right arrow keys to navigate forward and backwards.
+    */
+    const LEFT_ARROW_KEYCODE = 37
+    const RIGHT_ARROW_KEYCODE = 39
+
+    const getPrevUrl = () => document.getElementById('prev-link').href
+    const getNextUrl = () => document.getElementById('next-link').href
+    const initPageNav = (event) => {
+        const keycode = event.which
+
+        if (keycode === LEFT_ARROW_KEYCODE) {
+            window.location.href = getPrevUrl();
+        } else if (keycode === RIGHT_ARROW_KEYCODE) {
+            window.location.href = getNextUrl();
+        }
+    };
+
+    var keyboardListener = false;
+    $( document ).ready(() => {
+        if (keyboardListener === false) {
+            document.addEventListener('keydown', initPageNav)
+            keyboardListener = true;
+        }
+    });
+</script>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2008-2019, The SciPy community.
+      Last updated on Nov 29, 2019.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.1.
+    </div>
+<div class="footer-area footer--light">
+  <div class="footer-big">
+    <!-- start .container -->
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-12">
+          <div class="footer-widget">
+            <div class="widget-about">
+              <img src="../../_static/images/numpy_logo.svg" alt="NumPy logo" class="img-fluid">
+              <p>NumPy is the fundamental package needed for scientific computing with Python.</p>
+              <ul class="contact-details">
+                <li>
+                  <span class="icon-envelope-open"></span>
+                  <a href="https://mail.python.org/mailman/listinfo/numpy-discussion">
+                    Mailing list
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- Ends: .footer-widget -->
+        </div>
+        <!-- end /.col-md-4 -->
+        <div class="col-md-3 col-sm-4">
+          <div class="footer-widget">
+            <div class="footer-menu footer-menu--1">
+              <h4 class="footer-widget-title">About us</h4>
+              <ul>
+                <li>
+                  <a href="#">Our history</a>
+                </li>
+                <li>
+                  <a href="#">Ecosystem</a>
+                </li>
+                <li>
+                  <a href="#">Roadmap</a>
+                </li>
+                <li>
+                  <a href="#">Team</a>
+                </li>
+              </ul>
+            </div>
+            <!-- end /.footer-menu -->
+          </div>
+          <!-- Ends: .footer-widget -->
+        </div>
+        <!-- end /.col-md-3 -->
+
+        <div class="col-md-3 col-sm-4">
+          <div class="footer-widget">
+            <div class="footer-menu">
+              <h4 class="footer-widget-title">Community</h4>
+              <ul>
+                <li>
+                  <a href="#">Blog</a>
+                </li>
+                <li>
+                  <a href="#">Contributing</a>
+                </li>
+                <li>
+                  <a href="#">Code of conduct</a>
+                </li>
+                <li>
+                  <a href="#">Community survey</a>
+                </li>
+              </ul>
+            </div>
+            <!-- end /.footer-menu -->
+          </div>
+          <!-- Ends: .footer-widget -->
+        </div>
+        <!-- end /.col-lg-3 -->
+
+        <div class="col-md-3 col-sm-4">
+          <div class="footer-widget">
+            <div class="footer-menu no-padding">
+              <h4 class="footer-widget-title">Learning &  Documentation</h4>
+              <ul>
+                <li>
+                  <a href="#">User guide</a>
+                </li>
+                <li>
+                  <a href="#">API reference</a>
+                </li>
+                <li>
+                  <a href="#">Release notes</a>
+                </li>
+                <li>
+                  <a href="#">Tutorials</a>
+                </li>
+                <li>
+                  <a href="#">Videos</a>
+                </li>
+                <li>
+                  <a href="#">Books</a>
+                </li>
+                <li>
+                  <a href="#">Courses</a>
+                </li>
+              </ul>
+            </div>
+            <!-- end /.footer-menu -->
+          </div>
+          <!-- Ends: .footer-widget -->
+        </div>
+        <!-- Ends: .col-lg-3 -->
+
+      </div>
+      <!-- end /.row -->
+    </div>
+    <!-- end /.container -->
+  </div>
+  <!-- end /.footer-big -->
+
+  <div class="mini-footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="copyright-text">
+            <p>&copy; <span id="year"></span>
+              <a href="#">NumPy Developers</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </body>
+</html>

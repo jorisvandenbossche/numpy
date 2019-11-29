@@ -1,0 +1,711 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>numpy.lib.format &#8212; NumPy v1.18.dev0 Manual</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../_static/sphinx-bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/extra-footer.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/custom_theme.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/code-highlight.css" />
+    <link href="../../_static/css/custom.css" rel="stylesheet">
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Linear algebra (numpy.linalg)" href="../routines.linalg.html" />
+    <link rel="prev" title="numpy.DataSource.open" href="numpy.DataSource.open.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+
+<a class="navbar-brand" href="../../index.html">
+  <img src="../../_static/numpy_logo.png" class="logo" alt="logo">
+</a>
+
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+</button>
+
+<div id="navbar-menu" class="collapse navbar-collapse">
+  <ul id="navbar-main-elements" class="navbar-nav mr-auto">
+    <li class="nav-item">
+        <a class="nav-link" href="../../index.html">Home</a>
+    </li>
+    
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../user/index.html">User Guide</a>
+    </li>
+    
+    <li class="nav-item active">
+        <a class="nav-link" href="../index.html">NumPy Reference</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../dev/index.html">Contributing to NumPy</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../release.html">Release Notes</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../about.html">About NumPy</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href=""></a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../bugs.html">Reporting bugs</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../glossary.html">Glossary</a>
+    </li>
+    
+  </ul>
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+      <a class="nav-link" href="https://github.com/pandas-dev/pandas" target="_blank" rel="noopener">
+        <span><i class="fab fa-github-alt" style="color:#333;font-size:1rem;line-height:1.25"></i></span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="https://twitter.com/pandas_dev" target="_blank" rel="noopener">
+        <span><i class="fab fa-twitter" style="color:#55acee;font-size:1rem;line-height:1.25"></i></span>
+      </a>
+    </li>
+  </ul>
+</div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row flex-xl-nowrap">
+          <div class="col-12 col-md-3 col-xl-2 bd-sidebar">
+              
+
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+  <div class="bd-toc-item active">
+  
+
+  <ul class="nav bd-sidenav">
+      
+      
+      
+      
+        
+          
+              <li class="">
+                  <a href="../arrays.html">Array objects</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../constants.html">Constants</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../ufuncs.html">Universal functions (ufunc)</a>
+              </li>
+          
+        
+          
+    
+              <li class="active">
+                  <a href="../routines.html">Routines</a>
+                  <ul>
+                  
+                      <li class="">
+                          <a href="../routines.array-creation.html">Array creation routines</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.array-manipulation.html">Array manipulation routines</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.bitwise.html">Binary operations</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.char.html">String operations</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.ctypeslib.html">C-Types Foreign Function Interface (numpy.ctypeslib)</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.datetime.html">Datetime Support Functions</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.dtype.html">Data type routines</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.dual.html">Optionally Scipy-accelerated routines (numpy.dual)</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.emath.html">Mathematical functions with automatic domain (numpy.emath)</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.err.html">Floating point error handling</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.fft.html">Discrete Fourier Transform (numpy.fft)</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.financial.html">Financial functions</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.functional.html">Functional programming</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.help.html">NumPy-specific help functions</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.indexing.html">Indexing routines</a>
+                      </li>
+                  
+                      <li class="active">
+                          <a href="../routines.io.html">Input and output</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.linalg.html">Linear algebra (numpy.linalg)</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.logic.html">Logic functions</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.ma.html">Masked array operations</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.math.html">Mathematical functions</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.matlib.html">Matrix library (numpy.matlib)</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.other.html">Miscellaneous routines</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.padding.html">Padding Arrays</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.polynomials.html">Polynomials</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../random/index.html">Random sampling (numpy.random)</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.set.html">Set routines</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.sort.html">Sorting, searching, and counting</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.statistics.html">Statistics</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.testing.html">Test Support (numpy.testing)</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="../routines.window.html">Window functions</a>
+                      </li>
+                  
+                  </ul>
+              </li> 
+          
+        
+          
+              <li class="">
+                  <a href="../distutils.html">Packaging (numpy.distutils)</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../distutils_guide.html">NumPy Distutils - Users Guide</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../c-api/index.html">NumPy C-API</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../internals.html">NumPy internals</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../swig.html">NumPy and SWIG</a>
+              </li>
+          
+        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </ul>
+
+</nav>
+
+
+              
+          </div>
+
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+              
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#npy-format" class="nav-link">NPY format</a><ul class="nav section-nav flex-column">
+                
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#capabilities" class="nav-link">Capabilities</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#limitations" class="nav-link">Limitations</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#file-extensions" class="nav-link">File extensions</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#version-numbering" class="nav-link">Version numbering</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#format-version-1-0" class="nav-link">Format Version 1.0</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#format-version-2-0" class="nav-link">Format Version 2.0</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#format-version-3-0" class="nav-link">Format Version 3.0</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#notes" class="nav-link">Notes</a>
+        </li>
+    
+            </ul>
+        </li>
+    
+    </ul>
+</nav>
+              
+            </div>
+
+          <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">
+              <div>
+                
+  <div class="section" id="module-numpy.lib.format">
+<span id="numpy-lib-format"></span><h1>numpy.lib.format<a class="headerlink" href="#module-numpy.lib.format" title="Permalink to this headline">¶</a></h1>
+<p>Binary serialization</p>
+<div class="section" id="npy-format">
+<h2>NPY format<a class="headerlink" href="#npy-format" title="Permalink to this headline">¶</a></h2>
+<p>A simple format for saving numpy arrays to disk with the full
+information about them.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">.npy</span></code> format is the standard binary file format in NumPy for
+persisting a <em>single</em> arbitrary NumPy array on disk. The format stores all
+of the shape and dtype information necessary to reconstruct the array
+correctly even on another machine with a different architecture.
+The format is designed to be as simple as possible while achieving
+its limited goals.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">.npz</span></code> format is the standard format for persisting <em>multiple</em> NumPy
+arrays on disk. A <code class="docutils literal notranslate"><span class="pre">.npz</span></code> file is a zip file containing multiple <code class="docutils literal notranslate"><span class="pre">.npy</span></code>
+files, one for each array.</p>
+<div class="section" id="capabilities">
+<h3>Capabilities<a class="headerlink" href="#capabilities" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Can represent all NumPy arrays including nested record arrays and
+object arrays.</p></li>
+<li><p>Represents the data in its native binary form.</p></li>
+<li><p>Supports Fortran-contiguous arrays directly.</p></li>
+<li><p>Stores all of the necessary information to reconstruct the array
+including shape and dtype on a machine of a different
+architecture.  Both little-endian and big-endian arrays are
+supported, and a file with little-endian numbers will yield
+a little-endian array on any machine reading the file. The
+types are described in terms of their actual sizes. For example,
+if a machine with a 64-bit C “long int” writes out an array with
+“long ints”, a reading machine with 32-bit C “long ints” will yield
+an array with 64-bit integers.</p></li>
+<li><p>Is straightforward to reverse engineer. Datasets often live longer than
+the programs that created them. A competent developer should be
+able to create a solution in their preferred programming language to
+read most <code class="docutils literal notranslate"><span class="pre">.npy</span></code> files that he has been given without much
+documentation.</p></li>
+<li><p>Allows memory-mapping of the data. See <em class="xref py py-obj">open_memmep</em>.</p></li>
+<li><p>Can be read from a filelike stream object instead of an actual file.</p></li>
+<li><p>Stores object arrays, i.e. arrays containing elements that are arbitrary
+Python objects. Files with object arrays are not to be mmapable, but
+can be read and written to disk.</p></li>
+</ul>
+</div>
+<div class="section" id="limitations">
+<h3>Limitations<a class="headerlink" href="#limitations" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Arbitrary subclasses of numpy.ndarray are not completely preserved.
+Subclasses will be accepted for writing, but only the array data will
+be written out. A regular numpy.ndarray object will be created
+upon reading the file.</p></li>
+</ul>
+<div class="alert alert-warning">
+<p class="admonition-title">Warning</p>
+<p>Due to limitations in the interpretation of structured dtypes, dtypes
+with fields with empty names will have the names replaced by ‘f0’, ‘f1’,
+etc. Such arrays will not round-trip through the format entirely
+accurately. The data is intact; only the field names will differ. We are
+working on a fix for this. This fix will not require a change in the
+file format. The arrays with such structures can still be saved and
+restored, and the correct dtype may be restored by using the
+<code class="docutils literal notranslate"><span class="pre">loadedarray.view(correct_dtype)</span></code> method.</p>
+</div>
+</div>
+<div class="section" id="file-extensions">
+<h3>File extensions<a class="headerlink" href="#file-extensions" title="Permalink to this headline">¶</a></h3>
+<p>We recommend using the <code class="docutils literal notranslate"><span class="pre">.npy</span></code> and <code class="docutils literal notranslate"><span class="pre">.npz</span></code> extensions for files saved
+in this format. This is by no means a requirement; applications may wish
+to use these file formats but use an extension specific to the
+application. In the absence of an obvious alternative, however,
+we suggest using <code class="docutils literal notranslate"><span class="pre">.npy</span></code> and <code class="docutils literal notranslate"><span class="pre">.npz</span></code>.</p>
+</div>
+<div class="section" id="version-numbering">
+<h3>Version numbering<a class="headerlink" href="#version-numbering" title="Permalink to this headline">¶</a></h3>
+<p>The version numbering of these formats is independent of NumPy version
+numbering. If the format is upgraded, the code in <em class="xref py py-obj">numpy.io</em> will still
+be able to read and write Version 1.0 files.</p>
+</div>
+<div class="section" id="format-version-1-0">
+<h3>Format Version 1.0<a class="headerlink" href="#format-version-1-0" title="Permalink to this headline">¶</a></h3>
+<p>The first 6 bytes are a magic string: exactly <code class="docutils literal notranslate"><span class="pre">\x93NUMPY</span></code>.</p>
+<p>The next 1 byte is an unsigned byte: the major version number of the file
+format, e.g. <code class="docutils literal notranslate"><span class="pre">\x01</span></code>.</p>
+<p>The next 1 byte is an unsigned byte: the minor version number of the file
+format, e.g. <code class="docutils literal notranslate"><span class="pre">\x00</span></code>. Note: the version of the file format is not tied
+to the version of the numpy package.</p>
+<p>The next 2 bytes form a little-endian unsigned short int: the length of
+the header data HEADER_LEN.</p>
+<p>The next HEADER_LEN bytes form the header data describing the array’s
+format. It is an ASCII string which contains a Python literal expression
+of a dictionary. It is terminated by a newline (<code class="docutils literal notranslate"><span class="pre">\n</span></code>) and padded with
+spaces (<code class="docutils literal notranslate"><span class="pre">\x20</span></code>) to make the total of
+<code class="docutils literal notranslate"><span class="pre">len(magic</span> <span class="pre">string)</span> <span class="pre">+</span> <span class="pre">2</span> <span class="pre">+</span> <span class="pre">len(length)</span> <span class="pre">+</span> <span class="pre">HEADER_LEN</span></code> be evenly divisible
+by 64 for alignment purposes.</p>
+<p>The dictionary contains three keys:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“descr”<span class="classifier">dtype.descr</span></dt><dd><p>An object that can be passed as an argument to the <a class="reference internal" href="numpy.dtype.html#numpy.dtype" title="numpy.dtype"><code class="xref py py-obj docutils literal notranslate"><span class="pre">numpy.dtype</span></code></a>
+constructor to create the array’s dtype.</p>
+</dd>
+<dt>“fortran_order”<span class="classifier">bool</span></dt><dd><p>Whether the array data is Fortran-contiguous or not. Since
+Fortran-contiguous arrays are a common form of non-C-contiguity,
+we allow them to be written directly to disk for efficiency.</p>
+</dd>
+<dt>“shape”<span class="classifier">tuple of int</span></dt><dd><p>The shape of the array.</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>For repeatability and readability, the dictionary keys are sorted in
+alphabetic order. This is for convenience only. A writer SHOULD implement
+this if possible. A reader MUST NOT depend on this.</p>
+<p>Following the header comes the array data. If the dtype contains Python
+objects (i.e. <code class="docutils literal notranslate"><span class="pre">dtype.hasobject</span> <span class="pre">is</span> <span class="pre">True</span></code>), then the data is a Python
+pickle of the array. Otherwise the data is the contiguous (either C-
+or Fortran-, depending on <code class="docutils literal notranslate"><span class="pre">fortran_order</span></code>) bytes of the array.
+Consumers can figure out the number of bytes by multiplying the number
+of elements given by the shape (noting that <code class="docutils literal notranslate"><span class="pre">shape=()</span></code> means there is
+1 element) by <code class="docutils literal notranslate"><span class="pre">dtype.itemsize</span></code>.</p>
+</div>
+<div class="section" id="format-version-2-0">
+<h3>Format Version 2.0<a class="headerlink" href="#format-version-2-0" title="Permalink to this headline">¶</a></h3>
+<p>The version 1.0 format only allowed the array header to have a total size of
+65535 bytes.  This can be exceeded by structured arrays with a large number of
+columns.  The version 2.0 format extends the header size to 4 GiB.
+<a class="reference internal" href="numpy.save.html#numpy.save" title="numpy.save"><code class="xref py py-obj docutils literal notranslate"><span class="pre">numpy.save</span></code></a> will automatically save in 2.0 format if the data requires it,
+else it will always use the more compatible 1.0 format.</p>
+<p>The description of the fourth element of the header therefore has become:
+“The next 4 bytes form a little-endian unsigned int: the length of the header
+data HEADER_LEN.”</p>
+</div>
+<div class="section" id="format-version-3-0">
+<h3>Format Version 3.0<a class="headerlink" href="#format-version-3-0" title="Permalink to this headline">¶</a></h3>
+<p>This version replaces the ASCII string (which in practice was latin1) with
+a utf8-encoded string, so supports structured types with any unicode field
+names.</p>
+</div>
+<div class="section" id="notes">
+<h3>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">.npy</span></code> format, including motivation for creating it and a comparison of
+alternatives, is described in the <a class="reference external" href="https://www.numpy.org/neps/nep-0001-npy-format.html">“npy-format” NEP</a>, however details have
+evolved with time and this document is more current.</p>
+</div>
+</div>
+</div>
+
+
+              </div>
+              <div class='prev-next-bottom'>
+                
+    <a class='left-prev' id="prev-link" href="numpy.DataSource.open.html" title="previous page">numpy.DataSource.open</a>
+    <a class='right-next' id="next-link" href="../routines.linalg.html" title="next page">Linear algebra (<code class="xref py py-mod docutils literal notranslate"><span class="pre">numpy.linalg</span></code>)</a>
+
+              </div>
+          </main>
+
+      </div>
+    </div><script>
+    // TOC sidebar - add "active" class to parent list
+    //
+    // Bootstrap's scrollspy adds the active class to the <a> link,
+    // but for the automatic collapsing we need this on the parent list item.
+    //
+    // The event is triggered on "window" (and not the nav item as documented),
+    // see https://github.com/twbs/bootstrap/issues/20086
+    $(window).on("activate.bs.scrollspy", function(){
+    var navLinks = document.querySelectorAll('#bd-toc-nav a');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.remove('active');
+    }
+    var navLinks = document.querySelectorAll('#bd-toc-nav a.active');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.add('active');
+    }
+    });
+
+    /**
+     * Use left and right arrow keys to navigate forward and backwards.
+    */
+    const LEFT_ARROW_KEYCODE = 37
+    const RIGHT_ARROW_KEYCODE = 39
+
+    const getPrevUrl = () => document.getElementById('prev-link').href
+    const getNextUrl = () => document.getElementById('next-link').href
+    const initPageNav = (event) => {
+        const keycode = event.which
+
+        if (keycode === LEFT_ARROW_KEYCODE) {
+            window.location.href = getPrevUrl();
+        } else if (keycode === RIGHT_ARROW_KEYCODE) {
+            window.location.href = getNextUrl();
+        }
+    };
+
+    var keyboardListener = false;
+    $( document ).ready(() => {
+        if (keyboardListener === false) {
+            document.addEventListener('keydown', initPageNav)
+            keyboardListener = true;
+        }
+    });
+</script>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2008-2019, The SciPy community.
+      Last updated on Nov 29, 2019.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.1.
+    </div>
+<div class="footer-area footer--light">
+  <div class="footer-big">
+    <!-- start .container -->
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-12">
+          <div class="footer-widget">
+            <div class="widget-about">
+              <img src="../../_static/images/numpy_logo.svg" alt="NumPy logo" class="img-fluid">
+              <p>NumPy is the fundamental package needed for scientific computing with Python.</p>
+              <ul class="contact-details">
+                <li>
+                  <span class="icon-envelope-open"></span>
+                  <a href="https://mail.python.org/mailman/listinfo/numpy-discussion">
+                    Mailing list
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- Ends: .footer-widget -->
+        </div>
+        <!-- end /.col-md-4 -->
+        <div class="col-md-3 col-sm-4">
+          <div class="footer-widget">
+            <div class="footer-menu footer-menu--1">
+              <h4 class="footer-widget-title">About us</h4>
+              <ul>
+                <li>
+                  <a href="#">Our history</a>
+                </li>
+                <li>
+                  <a href="#">Ecosystem</a>
+                </li>
+                <li>
+                  <a href="#">Roadmap</a>
+                </li>
+                <li>
+                  <a href="#">Team</a>
+                </li>
+              </ul>
+            </div>
+            <!-- end /.footer-menu -->
+          </div>
+          <!-- Ends: .footer-widget -->
+        </div>
+        <!-- end /.col-md-3 -->
+
+        <div class="col-md-3 col-sm-4">
+          <div class="footer-widget">
+            <div class="footer-menu">
+              <h4 class="footer-widget-title">Community</h4>
+              <ul>
+                <li>
+                  <a href="#">Blog</a>
+                </li>
+                <li>
+                  <a href="#">Contributing</a>
+                </li>
+                <li>
+                  <a href="#">Code of conduct</a>
+                </li>
+                <li>
+                  <a href="#">Community survey</a>
+                </li>
+              </ul>
+            </div>
+            <!-- end /.footer-menu -->
+          </div>
+          <!-- Ends: .footer-widget -->
+        </div>
+        <!-- end /.col-lg-3 -->
+
+        <div class="col-md-3 col-sm-4">
+          <div class="footer-widget">
+            <div class="footer-menu no-padding">
+              <h4 class="footer-widget-title">Learning &  Documentation</h4>
+              <ul>
+                <li>
+                  <a href="#">User guide</a>
+                </li>
+                <li>
+                  <a href="#">API reference</a>
+                </li>
+                <li>
+                  <a href="#">Release notes</a>
+                </li>
+                <li>
+                  <a href="#">Tutorials</a>
+                </li>
+                <li>
+                  <a href="#">Videos</a>
+                </li>
+                <li>
+                  <a href="#">Books</a>
+                </li>
+                <li>
+                  <a href="#">Courses</a>
+                </li>
+              </ul>
+            </div>
+            <!-- end /.footer-menu -->
+          </div>
+          <!-- Ends: .footer-widget -->
+        </div>
+        <!-- Ends: .col-lg-3 -->
+
+      </div>
+      <!-- end /.row -->
+    </div>
+    <!-- end /.container -->
+  </div>
+  <!-- end /.footer-big -->
+
+  <div class="mini-footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="copyright-text">
+            <p>&copy; <span id="year"></span>
+              <a href="#">NumPy Developers</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </body>
+</html>

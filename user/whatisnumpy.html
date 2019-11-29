@@ -1,0 +1,532 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>What is NumPy? &#8212; NumPy v1.18.dev0 Manual</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="../_static/sphinx-bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/extra-footer.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom_theme.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/code-highlight.css" />
+    <link href="../_static/css/custom.css" rel="stylesheet">
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Installing NumPy" href="install.html" />
+    <link rel="prev" title="Setting up" href="setting-up.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+
+<a class="navbar-brand" href="../index.html">
+  <img src="../_static/numpy_logo.png" class="logo" alt="logo">
+</a>
+
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+</button>
+
+<div id="navbar-menu" class="collapse navbar-collapse">
+  <ul id="navbar-main-elements" class="navbar-nav mr-auto">
+    <li class="nav-item">
+        <a class="nav-link" href="../index.html">Home</a>
+    </li>
+    
+    
+    <li class="nav-item active">
+        <a class="nav-link" href="index.html">User Guide</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../reference/index.html">NumPy Reference</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../dev/index.html">Contributing to NumPy</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../release.html">Release Notes</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../about.html">About NumPy</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href=""></a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../bugs.html">Reporting bugs</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../glossary.html">Glossary</a>
+    </li>
+    
+  </ul>
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+      <a class="nav-link" href="https://github.com/pandas-dev/pandas" target="_blank" rel="noopener">
+        <span><i class="fab fa-github-alt" style="color:#333;font-size:1rem;line-height:1.25"></i></span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="https://twitter.com/pandas_dev" target="_blank" rel="noopener">
+        <span><i class="fab fa-twitter" style="color:#55acee;font-size:1rem;line-height:1.25"></i></span>
+      </a>
+    </li>
+  </ul>
+</div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row flex-xl-nowrap">
+          <div class="col-12 col-md-3 col-xl-2 bd-sidebar">
+              
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+  <div class="bd-toc-item active">
+  
+
+  <ul class="nav bd-sidenav">
+      
+      
+        
+          
+    
+              <li class="active">
+                  <a href="setting-up.html">Setting up</a>
+                  <ul>
+                  
+                      <li class="active">
+                          <a href="">What is NumPy?</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="install.html">Installing NumPy</a>
+                      </li>
+                  
+                  </ul>
+              </li> 
+          
+        
+          
+              <li class="">
+                  <a href="quickstart.html">Quickstart tutorial</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="basics.html">NumPy basics</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="misc.html">Miscellaneous</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="numpy-for-matlab-users.html">NumPy for Matlab users</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="building.html">Building from source</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="c-info.html">Using NumPy C-API</a>
+              </li>
+          
+        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </ul>
+
+</nav>
+
+
+              
+          </div>
+
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+              
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#why-is-numpy-fast" class="nav-link">Why is NumPy Fast?</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#who-else-uses-numpy" class="nav-link">Who Else Uses NumPy?</a>
+        </li>
+    
+    </ul>
+</nav>
+              
+            </div>
+
+          <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">
+              <div>
+                
+  <div class="section" id="what-is-numpy">
+<h1>What is NumPy?<a class="headerlink" href="#what-is-numpy" title="Permalink to this headline">¶</a></h1>
+<p>NumPy is the fundamental package for scientific computing in Python.
+It is a Python library that provides a multidimensional array object,
+various derived objects (such as masked arrays and matrices), and an
+assortment of routines for fast operations on arrays, including
+mathematical, logical, shape manipulation, sorting, selecting, I/O,
+discrete Fourier transforms, basic linear algebra, basic statistical
+operations, random simulation and much more.</p>
+<p>At the core of the NumPy package, is the <em class="xref py py-obj">ndarray</em> object.  This
+encapsulates <em>n</em>-dimensional arrays of homogeneous data types, with
+many operations being performed in compiled code for performance.
+There are several important differences between NumPy arrays and the
+standard Python sequences:</p>
+<ul class="simple">
+<li><p>NumPy arrays have a fixed size at creation, unlike Python lists
+(which can grow dynamically). Changing the size of an <em class="xref py py-obj">ndarray</em> will
+create a new array and delete the original.</p></li>
+<li><p>The elements in a NumPy array are all required to be of the same
+data type, and thus will be the same size in memory.  The exception:
+one can have arrays of (Python, including NumPy) objects, thereby
+allowing for arrays of different sized elements.</p></li>
+<li><p>NumPy arrays facilitate advanced mathematical and other types of
+operations on large numbers of data.  Typically, such operations are
+executed more efficiently and with less code than is possible using
+Python’s built-in sequences.</p></li>
+<li><p>A growing plethora of scientific and mathematical Python-based
+packages are using NumPy arrays; though these typically support
+Python-sequence input, they convert such input to NumPy arrays prior
+to processing, and they often output NumPy arrays.  In other words,
+in order to efficiently use much (perhaps even most) of today’s
+scientific/mathematical Python-based software, just knowing how to
+use Python’s built-in sequence types is insufficient - one also
+needs to know how to use NumPy arrays.</p></li>
+</ul>
+<p>The points about sequence size and speed are particularly important in
+scientific computing.  As a simple example, consider the case of
+multiplying each element in a 1-D sequence with the corresponding
+element in another sequence of the same length.  If the data are
+stored in two Python lists, <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code>, we could iterate over
+each element:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)):</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>This produces the correct answer, but if <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> each contain
+millions of numbers, we will pay the price for the inefficiencies of
+looping in Python.  We could accomplish the same task much more
+quickly in C by writing (for clarity we neglect variable declarations
+and initializations, memory allocation, etc.)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">rows</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">):</span> <span class="p">{</span>
+  <span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This saves all the overhead involved in interpreting the Python code
+and manipulating Python objects, but at the expense of the benefits
+gained from coding in Python.  Furthermore, the coding work required
+increases with the dimensionality of our data. In the case of a 2-D
+array, for example, the C code (abridged as before) expands to</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">rows</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">):</span> <span class="p">{</span>
+  <span class="k">for</span> <span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">columns</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">):</span> <span class="p">{</span>
+    <span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">];</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>NumPy gives us the best of both worlds: element-by-element operations
+are the “default mode” when an <em class="xref py py-obj">ndarray</em> is involved, but the
+element-by-element operation is speedily executed by pre-compiled C
+code.  In NumPy</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span>
+</pre></div>
+</div>
+<p>does what the earlier examples do, at near-C speeds, but with the code
+simplicity we expect from something based on Python. Indeed, the NumPy
+idiom is even simpler!  This last example illustrates two of NumPy’s
+features which are the basis of much of its power: vectorization and
+broadcasting.</p>
+<div class="section" id="why-is-numpy-fast">
+<span id="whatis-vectorization"></span><h2>Why is NumPy Fast?<a class="headerlink" href="#why-is-numpy-fast" title="Permalink to this headline">¶</a></h2>
+<p>Vectorization describes the absence of any explicit looping, indexing,
+etc., in the code - these things are taking place, of course, just
+“behind the scenes” in optimized, pre-compiled C code.  Vectorized
+code has many advantages, among which are:</p>
+<ul class="simple">
+<li><p>vectorized code is more concise and easier to read</p></li>
+<li><p>fewer lines of code generally means fewer bugs</p></li>
+<li><p>the code more closely resembles standard mathematical notation
+(making it easier, typically, to correctly code mathematical
+constructs)</p></li>
+<li><p>vectorization results in more “Pythonic” code. Without
+vectorization, our code would be littered with inefficient and
+difficult to read <code class="docutils literal notranslate"><span class="pre">for</span></code> loops.</p></li>
+</ul>
+<p>Broadcasting is the term used to describe the implicit
+element-by-element behavior of operations; generally speaking, in
+NumPy all operations, not just arithmetic operations, but
+logical, bit-wise, functional, etc., behave in this implicit
+element-by-element fashion, i.e., they broadcast.  Moreover, in the
+example above, <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> could be multidimensional arrays of the
+same shape, or a scalar and an array, or even two arrays of with
+different shapes, provided that the smaller array is “expandable” to
+the shape of the larger in such a way that the resulting broadcast is
+unambiguous. For detailed “rules” of broadcasting see
+<a class="reference internal" href="basics.broadcasting.html#module-numpy.doc.broadcasting" title="numpy.doc.broadcasting"><code class="xref py py-obj docutils literal notranslate"><span class="pre">numpy.doc.broadcasting</span></code></a>.</p>
+</div>
+<div class="section" id="who-else-uses-numpy">
+<h2>Who Else Uses NumPy?<a class="headerlink" href="#who-else-uses-numpy" title="Permalink to this headline">¶</a></h2>
+<p>NumPy fully supports an object-oriented approach, starting, once
+again, with <em class="xref py py-obj">ndarray</em>.  For example, <em class="xref py py-obj">ndarray</em> is a class, possessing
+numerous methods and attributes.  Many of its methods are mirrored by
+functions in the outer-most NumPy namespace, allowing the programmer
+to code in whichever paradigm they prefer. This flexibility has allowed the
+NumPy array dialect and NumPy <em class="xref py py-obj">ndarray</em> class to become the <em>de-facto</em> language
+of multi-dimensional data interchange used in Python.</p>
+</div>
+</div>
+
+
+              </div>
+              <div class='prev-next-bottom'>
+                
+    <a class='left-prev' id="prev-link" href="setting-up.html" title="previous page">Setting up</a>
+    <a class='right-next' id="next-link" href="install.html" title="next page">Installing NumPy</a>
+
+              </div>
+          </main>
+
+      </div>
+    </div><script>
+    // TOC sidebar - add "active" class to parent list
+    //
+    // Bootstrap's scrollspy adds the active class to the <a> link,
+    // but for the automatic collapsing we need this on the parent list item.
+    //
+    // The event is triggered on "window" (and not the nav item as documented),
+    // see https://github.com/twbs/bootstrap/issues/20086
+    $(window).on("activate.bs.scrollspy", function(){
+    var navLinks = document.querySelectorAll('#bd-toc-nav a');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.remove('active');
+    }
+    var navLinks = document.querySelectorAll('#bd-toc-nav a.active');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.add('active');
+    }
+    });
+
+    /**
+     * Use left and right arrow keys to navigate forward and backwards.
+    */
+    const LEFT_ARROW_KEYCODE = 37
+    const RIGHT_ARROW_KEYCODE = 39
+
+    const getPrevUrl = () => document.getElementById('prev-link').href
+    const getNextUrl = () => document.getElementById('next-link').href
+    const initPageNav = (event) => {
+        const keycode = event.which
+
+        if (keycode === LEFT_ARROW_KEYCODE) {
+            window.location.href = getPrevUrl();
+        } else if (keycode === RIGHT_ARROW_KEYCODE) {
+            window.location.href = getNextUrl();
+        }
+    };
+
+    var keyboardListener = false;
+    $( document ).ready(() => {
+        if (keyboardListener === false) {
+            document.addEventListener('keydown', initPageNav)
+            keyboardListener = true;
+        }
+    });
+</script>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2008-2019, The SciPy community.
+      Last updated on Nov 29, 2019.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.1.
+    </div>
+<div class="footer-area footer--light">
+  <div class="footer-big">
+    <!-- start .container -->
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-12">
+          <div class="footer-widget">
+            <div class="widget-about">
+              <img src="../_static/images/numpy_logo.svg" alt="NumPy logo" class="img-fluid">
+              <p>NumPy is the fundamental package needed for scientific computing with Python.</p>
+              <ul class="contact-details">
+                <li>
+                  <span class="icon-envelope-open"></span>
+                  <a href="https://mail.python.org/mailman/listinfo/numpy-discussion">
+                    Mailing list
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- Ends: .footer-widget -->
+        </div>
+        <!-- end /.col-md-4 -->
+        <div class="col-md-3 col-sm-4">
+          <div class="footer-widget">
+            <div class="footer-menu footer-menu--1">
+              <h4 class="footer-widget-title">About us</h4>
+              <ul>
+                <li>
+                  <a href="#">Our history</a>
+                </li>
+                <li>
+                  <a href="#">Ecosystem</a>
+                </li>
+                <li>
+                  <a href="#">Roadmap</a>
+                </li>
+                <li>
+                  <a href="#">Team</a>
+                </li>
+              </ul>
+            </div>
+            <!-- end /.footer-menu -->
+          </div>
+          <!-- Ends: .footer-widget -->
+        </div>
+        <!-- end /.col-md-3 -->
+
+        <div class="col-md-3 col-sm-4">
+          <div class="footer-widget">
+            <div class="footer-menu">
+              <h4 class="footer-widget-title">Community</h4>
+              <ul>
+                <li>
+                  <a href="#">Blog</a>
+                </li>
+                <li>
+                  <a href="#">Contributing</a>
+                </li>
+                <li>
+                  <a href="#">Code of conduct</a>
+                </li>
+                <li>
+                  <a href="#">Community survey</a>
+                </li>
+              </ul>
+            </div>
+            <!-- end /.footer-menu -->
+          </div>
+          <!-- Ends: .footer-widget -->
+        </div>
+        <!-- end /.col-lg-3 -->
+
+        <div class="col-md-3 col-sm-4">
+          <div class="footer-widget">
+            <div class="footer-menu no-padding">
+              <h4 class="footer-widget-title">Learning &  Documentation</h4>
+              <ul>
+                <li>
+                  <a href="#">User guide</a>
+                </li>
+                <li>
+                  <a href="#">API reference</a>
+                </li>
+                <li>
+                  <a href="#">Release notes</a>
+                </li>
+                <li>
+                  <a href="#">Tutorials</a>
+                </li>
+                <li>
+                  <a href="#">Videos</a>
+                </li>
+                <li>
+                  <a href="#">Books</a>
+                </li>
+                <li>
+                  <a href="#">Courses</a>
+                </li>
+              </ul>
+            </div>
+            <!-- end /.footer-menu -->
+          </div>
+          <!-- Ends: .footer-widget -->
+        </div>
+        <!-- Ends: .col-lg-3 -->
+
+      </div>
+      <!-- end /.row -->
+    </div>
+    <!-- end /.container -->
+  </div>
+  <!-- end /.footer-big -->
+
+  <div class="mini-footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="copyright-text">
+            <p>&copy; <span id="year"></span>
+              <a href="#">NumPy Developers</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </body>
+</html>

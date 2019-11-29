@@ -1,0 +1,518 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>NumPy Code of Conduct &#8212; NumPy v1.18.dev0 Manual</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../_static/sphinx-bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/extra-footer.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/custom_theme.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/code-highlight.css" />
+    <link href="../../_static/css/custom.css" rel="stylesheet">
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Git for development" href="../gitwash/index.html" />
+    <link rel="prev" title="Contributing to NumPy" href="../index.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+
+<a class="navbar-brand" href="../../index.html">
+  <img src="../../_static/numpy_logo.png" class="logo" alt="logo">
+</a>
+
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+</button>
+
+<div id="navbar-menu" class="collapse navbar-collapse">
+  <ul id="navbar-main-elements" class="navbar-nav mr-auto">
+    <li class="nav-item">
+        <a class="nav-link" href="../../index.html">Home</a>
+    </li>
+    
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../user/index.html">User Guide</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../reference/index.html">NumPy Reference</a>
+    </li>
+    
+    <li class="nav-item active">
+        <a class="nav-link" href="../index.html">Contributing to NumPy</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../release.html">Release Notes</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../about.html">About NumPy</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href=""></a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../bugs.html">Reporting bugs</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../glossary.html">Glossary</a>
+    </li>
+    
+  </ul>
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+      <a class="nav-link" href="https://github.com/pandas-dev/pandas" target="_blank" rel="noopener">
+        <span><i class="fab fa-github-alt" style="color:#333;font-size:1rem;line-height:1.25"></i></span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="https://twitter.com/pandas_dev" target="_blank" rel="noopener">
+        <span><i class="fab fa-twitter" style="color:#55acee;font-size:1rem;line-height:1.25"></i></span>
+      </a>
+    </li>
+  </ul>
+</div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row flex-xl-nowrap">
+          <div class="col-12 col-md-3 col-xl-2 bd-sidebar">
+              
+
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+  <div class="bd-toc-item active">
+  
+
+  <ul class="nav bd-sidenav">
+      
+      
+      
+      
+      
+      
+        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </ul>
+
+</nav>
+
+
+              
+          </div>
+
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+              
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#introduction" class="nav-link">Introduction</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#specific-guidelines" class="nav-link">Specific Guidelines</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#diversity-statement" class="nav-link">Diversity Statement</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#reporting-guidelines" class="nav-link">Reporting Guidelines</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#incident-reporting-resolution-code-of-conduct-enforcement" class="nav-link">Incident reporting resolution & Code of Conduct enforcement</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#endnotes" class="nav-link">Endnotes</a>
+        </li>
+    
+    </ul>
+</nav>
+              
+            </div>
+
+          <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">
+              <div>
+                
+  <div class="section" id="numpy-code-of-conduct">
+<h1>NumPy Code of Conduct<a class="headerlink" href="#numpy-code-of-conduct" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>This code of conduct applies to all spaces managed by the NumPy project,
+including all public and private mailing lists, issue trackers, wikis, blogs,
+Twitter, and any other communication channel used by our community.  The NumPy
+project does not organise in-person events, however events related to our
+community should have a code of conduct similar in spirit to this one.</p>
+<p>This code of conduct should be honored by everyone who participates in
+the NumPy community formally or informally, or claims any affiliation with the
+project, in any project-related activities and especially when representing the
+project, in any role.</p>
+<p>This code is not exhaustive or complete. It serves to distill our common
+understanding of a collaborative, shared environment and goals. Please try to
+follow this code in spirit as much as in letter, to create a friendly and
+productive environment that enriches the surrounding community.</p>
+</div>
+<div class="section" id="specific-guidelines">
+<h2>Specific Guidelines<a class="headerlink" href="#specific-guidelines" title="Permalink to this headline">¶</a></h2>
+<p>We strive to:</p>
+<ol class="arabic">
+<li><p>Be open. We invite anyone to participate in our community. We prefer to use
+public methods of communication for project-related messages, unless
+discussing something sensitive. This applies to messages for help or
+project-related support, too; not only is a public support request much more
+likely to result in an answer to a question, it also ensures that any
+inadvertent mistakes in answering are more easily detected and corrected.</p></li>
+<li><p>Be empathetic, welcoming, friendly, and patient. We work together to resolve
+conflict, and assume good intentions. We may all experience some frustration
+from time to time, but we do not allow frustration to turn into a personal
+attack. A community where people feel uncomfortable or threatened is not a
+productive one.</p></li>
+<li><p>Be collaborative. Our work will be used by other people, and in turn we will
+depend on the work of others. When we make something for the benefit of the
+project, we are willing to explain to others how it works, so that they can
+build on the work to make it even better. Any decision we make will affect
+users and colleagues, and we take those consequences seriously when making
+decisions.</p></li>
+<li><p>Be inquisitive. Nobody knows everything! Asking questions early avoids many
+problems later, so we encourage questions, although we may direct them to
+the appropriate forum. We will try hard to be responsive and helpful.</p></li>
+<li><p>Be careful in the words that we choose.  We are careful and respectful in
+our communication and we take responsibility for our own speech. Be kind to
+others. Do not insult or put down other participants.  We will not accept
+harassment or other exclusionary behaviour, such as:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Violent threats or language directed against another person.</p></li>
+<li><p>Sexist, racist, or otherwise discriminatory jokes and language.</p></li>
+<li><p>Posting sexually explicit or violent material.</p></li>
+<li><p>Posting (or threatening to post) other people’s personally identifying information (“doxing”).</p></li>
+<li><p>Sharing private content, such as emails sent privately or non-publicly,
+or unlogged forums such as IRC channel history, without the sender’s consent.</p></li>
+<li><p>Personal insults, especially those using racist or sexist terms.</p></li>
+<li><p>Unwelcome sexual attention.</p></li>
+<li><p>Excessive profanity. Please avoid swearwords; people differ greatly in their sensitivity to swearing.</p></li>
+<li><p>Repeated harassment of others. In general, if someone asks you to stop, then stop.</p></li>
+<li><p>Advocating for, or encouraging, any of the above behaviour.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="diversity-statement">
+<h2>Diversity Statement<a class="headerlink" href="#diversity-statement" title="Permalink to this headline">¶</a></h2>
+<p>The NumPy project welcomes and encourages participation by everyone. We are
+committed to being a community that everyone enjoys being part of. Although
+we may not always be able to accommodate each individual’s preferences, we try
+our best to treat everyone kindly.</p>
+<p>No matter how you identify yourself or how others perceive you: we welcome you.
+Though no list can hope to be comprehensive, we explicitly honour diversity in:
+age, culture, ethnicity, genotype, gender identity or expression, language,
+national origin, neurotype, phenotype, political beliefs, profession, race,
+religion, sexual orientation, socioeconomic status, subculture and technical
+ability, to the extent that these do not conflict with this code of conduct.</p>
+<p>Though we welcome people fluent in all languages, NumPy development is
+conducted in English.</p>
+<p>Standards for behaviour in the NumPy community are detailed in the Code of
+Conduct above. Participants in our community should uphold these standards
+in all their interactions and help others to do so as well (see next section).</p>
+</div>
+<div class="section" id="reporting-guidelines">
+<h2>Reporting Guidelines<a class="headerlink" href="#reporting-guidelines" title="Permalink to this headline">¶</a></h2>
+<p>We know that it is painfully common for internet communication to start at or
+devolve into obvious and flagrant abuse.  We also recognize that sometimes
+people may have a bad day, or be unaware of some of the guidelines in this Code
+of Conduct. Please keep this in mind when deciding on how to respond to a
+breach of this Code.</p>
+<p>For clearly intentional breaches, report those to the Code of Conduct committee
+(see below). For possibly unintentional breaches, you may reply to the person
+and point out this code of conduct (either in public or in private, whatever is
+most appropriate). If you would prefer not to do that, please feel free to
+report to the Code of Conduct Committee directly, or ask the Committee for
+advice, in confidence.</p>
+<p>You can report issues to the NumPy Code of Conduct committee, at
+<a class="reference external" href="mailto:numpy-conduct&#37;&#52;&#48;googlegroups&#46;com">numpy-conduct<span>&#64;</span>googlegroups<span>&#46;</span>com</a>. Currently, the committee consists of:</p>
+<ul class="simple">
+<li><p>Stefan van der Walt</p></li>
+<li><p>Nathaniel J. Smith</p></li>
+<li><p>Ralf Gommers</p></li>
+</ul>
+<p>If your report involves any members of the committee, or if they feel they have
+a conflict of interest in handling it, then they will recuse themselves from
+considering your report. Alternatively, if for any reason you feel
+uncomfortable making a report to the committee, then you can also contact:</p>
+<ul class="simple">
+<li><p>Senior <a class="reference external" href="https://numfocus.org/code-of-conduct#persons-responsible">NumFOCUS staff</a>: <a class="reference external" href="mailto:conduct&#37;&#52;&#48;numfocus&#46;org">conduct<span>&#64;</span>numfocus<span>&#46;</span>org</a></p></li>
+</ul>
+</div>
+<div class="section" id="incident-reporting-resolution-code-of-conduct-enforcement">
+<h2>Incident reporting resolution &amp; Code of Conduct enforcement<a class="headerlink" href="#incident-reporting-resolution-code-of-conduct-enforcement" title="Permalink to this headline">¶</a></h2>
+<p><em>This section summarizes the most important points, more details can be found
+in</em> <a class="reference internal" href="report_handling_manual.html#coc-reporting-manual"><span class="std std-ref">NumPy Code of Conduct - How to follow up on a report</span></a>.</p>
+<p>We will investigate and respond to all complaints. The NumPy Code of Conduct
+Committee and the NumPy Steering Committee (if involved) will protect the
+identity of the reporter, and treat the content of complaints as confidential
+(unless the reporter agrees otherwise).</p>
+<p>In case of severe and obvious breaches, e.g. personal threat or violent, sexist
+or racist language, we will immediately disconnect the originator from NumPy
+communication channels; please see the manual for details.</p>
+<p>In cases not involving clear severe and obvious breaches of this code of
+conduct, the process for acting on any received code of conduct violation
+report will be:</p>
+<ol class="arabic simple">
+<li><p>acknowledge report is received</p></li>
+<li><p>reasonable discussion/feedback</p></li>
+<li><p>mediation (if feedback didn’t help, and only if both reporter and reportee agree to this)</p></li>
+<li><p>enforcement via transparent decision (see <a class="reference internal" href="report_handling_manual.html#coc-resolutions"><span class="std std-ref">Resolutions</span></a>) by the
+Code of Conduct Committee</p></li>
+</ol>
+<p>The committee will respond to any report as soon as possible, and at most
+within 72 hours.</p>
+</div>
+<div class="section" id="endnotes">
+<h2>Endnotes<a class="headerlink" href="#endnotes" title="Permalink to this headline">¶</a></h2>
+<p>We are thankful to the groups behind the following documents, from which we
+drew content and inspiration:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/dev/conduct/code_of_conduct.html">The SciPy Code of Conduct</a></p></li>
+</ul>
+</div>
+</div>
+
+
+              </div>
+              <div class='prev-next-bottom'>
+                
+    <a class='left-prev' id="prev-link" href="../index.html" title="previous page">Contributing to NumPy</a>
+    <a class='right-next' id="next-link" href="../gitwash/index.html" title="next page">Git for development</a>
+
+              </div>
+          </main>
+
+      </div>
+    </div><script>
+    // TOC sidebar - add "active" class to parent list
+    //
+    // Bootstrap's scrollspy adds the active class to the <a> link,
+    // but for the automatic collapsing we need this on the parent list item.
+    //
+    // The event is triggered on "window" (and not the nav item as documented),
+    // see https://github.com/twbs/bootstrap/issues/20086
+    $(window).on("activate.bs.scrollspy", function(){
+    var navLinks = document.querySelectorAll('#bd-toc-nav a');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.remove('active');
+    }
+    var navLinks = document.querySelectorAll('#bd-toc-nav a.active');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.add('active');
+    }
+    });
+
+    /**
+     * Use left and right arrow keys to navigate forward and backwards.
+    */
+    const LEFT_ARROW_KEYCODE = 37
+    const RIGHT_ARROW_KEYCODE = 39
+
+    const getPrevUrl = () => document.getElementById('prev-link').href
+    const getNextUrl = () => document.getElementById('next-link').href
+    const initPageNav = (event) => {
+        const keycode = event.which
+
+        if (keycode === LEFT_ARROW_KEYCODE) {
+            window.location.href = getPrevUrl();
+        } else if (keycode === RIGHT_ARROW_KEYCODE) {
+            window.location.href = getNextUrl();
+        }
+    };
+
+    var keyboardListener = false;
+    $( document ).ready(() => {
+        if (keyboardListener === false) {
+            document.addEventListener('keydown', initPageNav)
+            keyboardListener = true;
+        }
+    });
+</script>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2008-2019, The SciPy community.
+      Last updated on Nov 29, 2019.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.1.
+    </div>
+<div class="footer-area footer--light">
+  <div class="footer-big">
+    <!-- start .container -->
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-12">
+          <div class="footer-widget">
+            <div class="widget-about">
+              <img src="../../_static/images/numpy_logo.svg" alt="NumPy logo" class="img-fluid">
+              <p>NumPy is the fundamental package needed for scientific computing with Python.</p>
+              <ul class="contact-details">
+                <li>
+                  <span class="icon-envelope-open"></span>
+                  <a href="https://mail.python.org/mailman/listinfo/numpy-discussion">
+                    Mailing list
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- Ends: .footer-widget -->
+        </div>
+        <!-- end /.col-md-4 -->
+        <div class="col-md-3 col-sm-4">
+          <div class="footer-widget">
+            <div class="footer-menu footer-menu--1">
+              <h4 class="footer-widget-title">About us</h4>
+              <ul>
+                <li>
+                  <a href="#">Our history</a>
+                </li>
+                <li>
+                  <a href="#">Ecosystem</a>
+                </li>
+                <li>
+                  <a href="#">Roadmap</a>
+                </li>
+                <li>
+                  <a href="#">Team</a>
+                </li>
+              </ul>
+            </div>
+            <!-- end /.footer-menu -->
+          </div>
+          <!-- Ends: .footer-widget -->
+        </div>
+        <!-- end /.col-md-3 -->
+
+        <div class="col-md-3 col-sm-4">
+          <div class="footer-widget">
+            <div class="footer-menu">
+              <h4 class="footer-widget-title">Community</h4>
+              <ul>
+                <li>
+                  <a href="#">Blog</a>
+                </li>
+                <li>
+                  <a href="#">Contributing</a>
+                </li>
+                <li>
+                  <a href="#">Code of conduct</a>
+                </li>
+                <li>
+                  <a href="#">Community survey</a>
+                </li>
+              </ul>
+            </div>
+            <!-- end /.footer-menu -->
+          </div>
+          <!-- Ends: .footer-widget -->
+        </div>
+        <!-- end /.col-lg-3 -->
+
+        <div class="col-md-3 col-sm-4">
+          <div class="footer-widget">
+            <div class="footer-menu no-padding">
+              <h4 class="footer-widget-title">Learning &  Documentation</h4>
+              <ul>
+                <li>
+                  <a href="#">User guide</a>
+                </li>
+                <li>
+                  <a href="#">API reference</a>
+                </li>
+                <li>
+                  <a href="#">Release notes</a>
+                </li>
+                <li>
+                  <a href="#">Tutorials</a>
+                </li>
+                <li>
+                  <a href="#">Videos</a>
+                </li>
+                <li>
+                  <a href="#">Books</a>
+                </li>
+                <li>
+                  <a href="#">Courses</a>
+                </li>
+              </ul>
+            </div>
+            <!-- end /.footer-menu -->
+          </div>
+          <!-- Ends: .footer-widget -->
+        </div>
+        <!-- Ends: .col-lg-3 -->
+
+      </div>
+      <!-- end /.row -->
+    </div>
+    <!-- end /.container -->
+  </div>
+  <!-- end /.footer-big -->
+
+  <div class="mini-footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="copyright-text">
+            <p>&copy; <span id="year"></span>
+              <a href="#">NumPy Developers</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </body>
+</html>

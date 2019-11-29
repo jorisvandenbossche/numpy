@@ -1,7 +1,7 @@
 .. _user:
 
 ################
-NumPy User Guide
+User Guide
 ################
 
 This guide is intended as an introductory overview of NumPy and

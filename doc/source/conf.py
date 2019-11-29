@@ -99,8 +99,25 @@ if not os.path.isdir(themedir):
     raise RuntimeError("Get the scipy-sphinx-theme first, "
                        "via git submodule init && git submodule update")
 
-html_theme = 'scipy'
-html_theme_path = [themedir]
+html_theme = 'pandas_sphinx_theme'
+#html_theme_path = [themedir]
+html_logo = '_static/numpy_logo.png'
+
+# These folders are copied to the documentation's HTML output
+html_static_path = ['_static']
+
+# These paths are either relative to html_static_path
+# or fully qualified paths (eg. https://...)
+html_css_files = [
+    'css/extra-footer.css',
+    'css/custom_theme.css',
+    'css/theme.css',
+    'css/code-highlight.css',
+]
+
+# badge_only.css      custom_theme.css  footer-rst.css  preloader.css   sidebar-right.css   theme.css
+# code-highlight.css  extra-footer.css  navbar.css      responsive.css  sidenav-mobile.css
+
 
 if 'scipyorg' in tags:
     # Build for the scipy.org website
